@@ -1,0 +1,61 @@
+{% extends "layouts/base-caosp.html" %}
+{% load widget_tweaks %}
+{% load partials %}
+{% block title %} Ajouter un établissement {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<main class="content">
+		<div class="container-fluid p-0">
+
+			<h1 class="h3 mb-3">Liste</h1>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Empty card</h5>
+						</div>
+						<div class="card-body">
+							<table class="table table-zebra table-lg">
+								<thead>
+									<tr>
+										<th>Code</th>
+										<th>Etablissement</th>
+										<th>Email</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody id="college-table-body">
+									{% for college in colleges %}
+									{% partialdef todoitem-partial inline=True %}
+										<tr>
+											<td>{{ college.code }}</td>
+											<td>{{ college.etablissement }}</td>
+											<td>{{ college.email }}</td>
+											<td>
+												
+												<button class="btn btn-xs btn-error"
+													hx-delete="#"
+													hx-on:delete-college="this.closest('tr').remove()">Delete</button>
+											</td>
+										</tr>
+										{% endpartialdef %}
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

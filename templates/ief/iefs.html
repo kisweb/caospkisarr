@@ -1,0 +1,49 @@
+{% extends 'layouts/base-caosp.html' %}
+
+{% block title %} Blank Page {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% load static %}
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            
+        </div>
+
+        <div class="row">
+            {% for ief in iefs %}
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>{{ief.name}}</h3>
+                        <h4>{{ief.college.etablissement}}</h4>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="mb-2">
+							<input class="form-control mb-1" type="text" placeholder="Académie : {{ief.academie}}" disabled>
+						</div>
+                        {%if request.user.is_staff %}
+                         
+                            <a href=" {% url 'ief:edit' ief.id %} " class="card-link btn btn-outline-info">Editer</a>
+                            <a href="{% url 'ief:delete' ief.id %}" class="card-link btn btn-outline-danger">Supprimer</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

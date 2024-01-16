@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br><br><br>
+
+<h1 class="text-capitalize text-center mx-10 bg-dark text-white"> Register a new school </h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="name"> Name </label>
+            <input name="name" required type="text" class="form-control" id="name"
+                placeholder="Etablissement">
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="code"> code </label>
+            <input name="code" disabled type="text" class="form-control" id="code"
+                placeholder="Code">
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="ief">IEF</label>
+            <select name="ief" class="form-control" required id="ief">
+                <option> Choisir l'IEF .. </option>
+                <option value="B1">Bignona 1</option>
+                <option value="B2">Bignona 2</option>
+                <option value="Ou">Oussouye</option>
+                <option value="Zi">Ziguinchor</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="email"> Email </label>
+            <input name="email" required type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+    </div>
+
+    <div class="form-row">      
+
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="phone"> Phone </label>
+            <input name="phone" required type="number" class="form-control" id="phone"
+                placeholder="Téléphone">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="addres"> Adresse </label>
+            <input name="address" type="text" required type="text" class="form-control" id="address"
+                placeholder="Adresse">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="user"> Agent </label>
+            <input name="user" type="text" class="form-control" id="user" value={{request.user}} />
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Save</button>
+
+</form>
+
+<br><br><br>
+
+{% endblock content %}

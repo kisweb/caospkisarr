@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Kis@rrW3b">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="shortcut icon" href="{% static 'assets/img/icons/icon-48x48.png' %}" />
+	
+	<title>
+        CAOSP - {% block title %}{% endblock %}
+    </title>
+
+	<link href="{% static 'assets/css/app.css' %}" rel="stylesheet">
+
+    <!-- Specific Page CSS goes HERE  -->
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+	<div class="wrapper">
+
+		{% include 'includes/sidebar-caosp.html' %}
+
+		<div class="main">
+			
+			{% include 'includes/navigation.html' %}
+			<div class="container mb-1">
+
+				{% for message in messages %}
+				<div class="alert  {{message.tags}} alert-dismissible" role="alert">
+					<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+					<div class="alert-message">
+						<strong>{{ message|safe }} </strong>
+					</div>
+				</div>
+				{% endfor %}
+				
+			</div>
+			{% block content %}{% endblock content %}
+
+			{% include 'includes/footer.html' %}
+
+		</div>
+	</div>
+
+	{% include 'includes/scripts.html' %}
+
+	<!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
+
+</body>
+</html>

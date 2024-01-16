@@ -1,0 +1,40 @@
+{% load static %}
+<nav id="sidebar" class="sidebar">
+    <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="{% url 'core:index' %}">
+            <img src="{% static 'assets/img/avatars/taureau.png' %}" class="rounded-circle" alt="logo" width="36px" height="36px">
+            <span class="align-middle">CAOSP ZIG</span>
+        </a>
+        <a class="sidebar-link" href="{% url 'core:about' %}">
+            {%if request.user.is_superuser %}
+            <span data-feather="briefcase" class="feather-sm mr-1"></span> <span class="align-middle">Settings</span>
+            {% endif %}
+        </a>
+        <div class="dropdown-divider"></div>
+        <div href="#iefs" data-toggle="collapse" class="sidebar-link  {% if 'etablissement-list' in segment %} collapsed {% endif %}">
+            <i class="align-middle" data-feather="home"></i> <span class="align-middle">IEF</span>
+        </div>
+        <ul class="sidebar-item">
+            <ul id="iefs" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                <li class="sidebar-item {% if 'etablissement-add' in segment %} active {% endif %}"><a class="sidebar-link" href="{% url 'ief:index' %}">Liste</a></li>
+                {%if request.user.is_staff %}
+                <li class="sidebar-item  {% if 'ief-add' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'ief:add' %}">Ajouter</a></li>
+                {% endif %}
+            </ul>
+        </ul>
+        <div href="#cem" data-toggle="collapse" class="sidebar-link  {% if 'etablissement-list' in segment %} collapsed {% endif %}">
+            <i class="align-middle" data-feather="home"></i> <span class="align-middle">Etablissements</span>
+        </div>
+        <ul class="sidebar-item">
+            <ul id="cem" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                <li class="sidebar-item {% if 'etablissement-add' in segment %} active {% endif %}"><a class="sidebar-link" href="{% url 'college:index' %}">Collèges</a></li>
+                {%if request.user.is_staff %}
+                <li class="sidebar-item  {% if 'quote-pdf' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'quote:index' %}">QuoteParts</a></li>
+                {% endif %}
+            </ul>
+        </ul>
+        <div class="dropdown-divider"></div>
+        
+    </div>
+</nav>
+

@@ -1,0 +1,56 @@
+{% extends 'layouts/base-caosp.html' %}
+
+{% block title %} {{ ief.name}} {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<main class="content">
+		<div class="container-fluid p-0">
+
+            <div class="row mb-2 mb-xl-3">
+				
+			</div>
+			<div class="card">
+                <div class="card-body">
+                    <div class="m-sm-4">
+                        
+                        <form method="POST" action=".">
+                            {% csrf_token %} 
+                            <div class="mb-3">
+                                <label class="form-label">IEF</label>
+                                <select class="form-control form-control-lg" name="name">
+                                    <option value="">Choisir l'IEF</option>
+                                    <option value="Bignona 1" {% if ief.name == 'Bignona 1' %} selected {% endif %}>Bignona 1</option>
+                                    <option value="Bignona 2" {% if ief.name == 'Bignona 2' %} selected {% endif %}>Bignona 2</option>
+                                    <option value="Oussouye" {% if ief.name == 'Oussouye' %} selected {% endif %}>Oussouye</option>
+                                    <option value="Ziguinchor" {% if ief.name == 'Ziguinchor' %} selected {% endif %}>Ziguinchor</option>
+                                </select> 
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Académie</label>
+                                <select class="form-control form-control-lg" name="academie" value="{{ ief.academie}}">
+                                    <option value="">Choisir l'Académie</option>
+                                    <option value="Ziguinchor" {% if ief.academie == 'Ziguinchor' %} selected {% endif %}>Ziguinchor</option>
+                                    <option value="Autre" {% if ief.academie != 'Ziguinchor' %} selected {% endif %}>Autre</option>
+                                </select>                                
+                            </div>
+                                                        
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-lg btn-primary">Mettre à jour</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+		</div>
+	</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,44 @@
+{% extends 'layouts/base-caosp.html' %}
+
+{% block title %} {{ ief.name}} {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<main class="content">
+		<div class="container-fluid p-0">
+
+            <div class="row mb-2 mb-xl-3">
+				
+			</div>
+			<div class="card">
+                <div class="card-body">
+                    <div class="m-sm-4">
+                        
+                        <form method="POST" action=".">
+                            {% csrf_token %} 
+                            <div class="mb-3">
+                                <label class="form-label">{{ief.name}}</label>                                
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ ief.academie }}</label>                                                               
+                            </div>
+                            
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-lg btn-primary">Ajouter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+		</div>
+	</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

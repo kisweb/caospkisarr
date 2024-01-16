@@ -1,0 +1,116 @@
+{% extends 'layouts/base-caosp.html' %}
+
+{% block title %} Blank Page {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<main class="content">
+		<div class="container-fluid p-0">
+
+            <div class="row mb-2 mb-xl-3">
+				<div class="col-auto d-none d-sm-block">
+					<h3><strong>Gestion des établissements - Ajouter un college</strong></h3>
+				</div>
+
+				<div class="col-auto ml-auto text-right mt-n1">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
+							<li class="breadcrumb-item"><a href="#">CAOSP</a></li>
+							<li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Collèges</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+			<div class="card">
+                <div class="card-body">
+                    <div class="m-sm-4">
+                        
+                        <form method="POST" action=".">
+                            {% csrf_token %} 
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="inputFirstName">Etablissement</label>
+                                    <input type="text" class="form-control" name="etablissement" value="{{ college.etablissement}}">
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="inputLastName">Email de l'Etablissement</label>
+                                    <input type="text" class="form-control" name="email" value="{{ college.email}}">
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputFirstName">Téléphone</label>
+                                    <input type="text" class="form-control" name="fixe" value="{{ college.fixe}}">
+                                </div>
+                                <div class="mb-3 col-md-5">
+                                    <label class="form-label" for="inputLastName">Statut</label>
+                                    <select class="select-control form-control-lg w-100" name="statut">
+                                        <option value="">Choisir du statut de l'Etablissement</option>
+                                        <option {% if college.statut == 'Public' %} selected {% endif %} value="Public">Public</option>
+                                        <option {% if college.statut == 'Privé Laïc' %} selected {% endif %} value="Privé Laïc">Privé Laïc</option>
+                                        <option {% if college.statut == 'Privé Catholique' %} selected {% endif %} value="Privé Catholique">Privé Catholique</option>
+                                        <option {% if college.statut == 'Autre' %} selected {% endif %} value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-3">
+                                    <label class="form-label" for="inputLastName">IEF</label>
+                                    <select class="select-control form-control-lg w-100" name="ief" id="">
+                                        <option value="">Choisir l'IEF</option>
+                                        {% for ibou in iefs%}
+                                        <option value="{{ibou.id}}">{{ibou.name}}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-12">
+                                    <label class="form-label" for="ce">Adresse du Collège</label>
+                                    <input type="text" class="form-control" name="adresse">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="ce">Prénom et Nom du CE</label>
+                                    <input type="text" class="form-control" name="nomce" value="{{college.nomce}}">
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="ce">Contact du CE</label>
+                                    <input type="text" class="form-control" name="mobile" value="{{college.mobile}}">
+                                </div>
+                            
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="ce">Ajouté par</label>
+                                    <input type="text" class="form-control" name="added_by" value="{{ request.user.name}}" disabled>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="ce">Conseiller responsable</label>
+                                    <select class="select-control form-control-lg w-100" name="conseiller" id="">
+                                        <option value="">Choisir le conseiller</option>
+                                        {% for ibou in users%}
+                                        <option value="{{ibou.id}}">{{ ibou.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            
+                            </div>
+                            <button type="submit" class="btn btn-info">Enregistrer les données</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+		</div>
+	</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

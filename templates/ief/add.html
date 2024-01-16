@@ -1,0 +1,56 @@
+{% extends 'layouts/base-caosp.html' %}
+
+{% block title %} Blank Page {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<main class="content">
+		<div class="container-fluid p-0">
+
+            <div class="row mb-2 mb-xl-3">
+				
+			</div>
+			<div class="card">
+                <div class="card-body">
+                    <div class="m-sm-4">
+                        
+                        <form method="POST">
+                            {% csrf_token %} 
+                            <div class="mb-3">
+                                <label class="form-label">IEF</label>
+                                <select class="form-control form-control-lg" name="name" id="">
+                                    <option value="">Choisir l'IEF</option>
+                                    <option value="Bignona 1">Bignona 1</option>
+                                    <option value="Bignona 2">Bignona 2</option>
+                                    <option value="Oussouye">Oussouye</option>
+                                    <option value="Ziguinchor">Ziguinchor</option>
+                                </select> 
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Académie</label>
+                                <select class="form-control form-control-lg" name="academie" id="">
+                                    <option value="">Choisir l'Académie</option>
+                                    <option value="Ziguinchor">Ziguinchor</option>
+                                    <option value="Autre">Autre</option>
+                                </select>                                
+                            </div>
+                            
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-lg btn-primary">Ajouter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+		</div>
+	</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

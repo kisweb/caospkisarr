@@ -1,0 +1,227 @@
+{% extends 'layouts/base-caosp.html' %}
+{% load static %}
+{% block title %} Blank Page {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<br><br>
+
+<div class="row">
+   <a href='#' class="col-md-4">
+      <span class="badge text-bg-secondary"></span>
+   </a>
+
+   <a href="#" class="btn col-md-4 btn-primary">
+       Register a new Etablissement ok <span class="badge text-bg-secondary"></span>
+   </a>
+
+</div>
+
+<br> <br>
+
+<div class="form-group ">
+   <input id="search" class="form-control" type="text" placeholder="Search....">
+</div>
+
+<div>
+   <table class="table table-striped-columns">
+      <thead>
+         <tr>
+            <th scope="col">#</th>
+            <th scope="col">ETABLISSEMENT</th>
+            <th scope="col">CODE</th>
+            <th scope="col">IEF</th>
+            <th scope="col">PHONE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">ACTION</th>
+         </tr>
+      </thead>
+      <tbody id="myTable">
+         {% if colleges %}
+         {% for etab in colleges %}
+         <tr>
+            <th scope="row">{{ etab.pk }}</th>
+            <td>{{etab.etablissement}}</td>
+            <td>{{ etab.code }}</td>
+            <td>{{etab.ief.name}}</td>
+            <td>{{etab.fixe}}</td>
+            <td>{{ etab.email }}</td>
+            
+            <td>
+               <a href="#" title="Detail" class="badge text-white bg-success">View</a>
+
+               <button id="btn-invoice-sup" type="button" data-toggle="modal" data-target="#supprimer"
+                  class="badge text-white bg-danger" title="Supprimer" data-id="{{ etab.pk }}"
+                  data-etablissement="{{etab.etablissement}}">Delete
+               </button>
+
+               <button id="btn-invoice-mod" type="button" data-toggle="modal" title="Modifier" data-target="#modifier"
+                  data-id="{{etab.pk}}" data-etablissement="{{etab.etablissement}}"
+                  class="badge text-dark bg-warning"> Modify
+               </button>
+            </td>
+         </tr>
+
+         {% endfor %}
+
+         {% if etabs.has_other_pages %}
+
+         <div class="btn-group" role="group" aria-label="Item pagination">
+
+            {% if etabs.has_previous %}
+
+            <a href="?page={{ etabs.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+
+            {% endif %}
+
+            {% for page_number in etabs.paginator.page_range %}
+
+               {% if etabs.number == page_number %}
+
+                  <button class="btn btn-outline-primary active">
+                     <span> {{page_number}} <span class="sr-only">(current)</span></span>
+
+                  </button>
+
+                  {% else %}
+                     <a href="?page={{page_number}}" class="btn btn-outline-primary">
+                        {{ page_number }}
+                     </a>
+
+
+               {% endif %}   
+
+            {% endfor %}
+
+            {% if etabs.has_next %}
+
+               <a href="?page={{ etabs.next_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+
+            {% endif %}
+
+
+
+         </div>
+
+         {% endif %}
+
+         {% else %}
+         
+         <p class="text-center text-white">No etab found.</p>
+         {% endif %}
+
+
+      </tbody>
+
+   </table>
+</div>
+
+<!-- Modal modifier -->
+<div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-dark text-center" id="exampleModalLabel">Modification </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <form method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+
+               <input name="id_modified" type="hidden" id="id_modified">
+
+               <label class="text-white bg-primary" for="html">Name</label>
+               <input type="text" id="html" name="modified">
+
+               
+
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<!-- end modal-->
+
+<!-- Modal suppression -->
+<div class="modal fade" id="supprimer" tabindex="-1" role="dialog" aria-labelledby="sexampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-dark" id="sexampleModalLabel">Suppression de etab PART</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form method="post">
+               {% csrf_token %}
+               <input name="id_supprimer" type="hidden" id="id_supprimer">
+               <label id="label_id_s" class="text-dark checkbox-inline"> <strong id="strong_id_s">Etes-vous sûr de vouloir supprimer cet enregistrement ?</strong></label>
+
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger">Delete</button>
+               </div>
+            </form>
+         </div>
+
+      </div>
+   </div>
+</div>
+<!-- end modal-->
+
+<br><br>
+
+<script type="text/javascript">
+
+   // modification
+
+   $(document).on('click', '#btn-invoice-mod', function(){
+      let invoice_id = $(this).data('id');
+      let etablissement = $(this).data('etablissement');
+      $('#id_modified').val(invoice_id);
+
+   })
+
+   // deleting of invoice
+
+   $(document).on('click', '#btn-invoice-sup', function(){
+      let invoice_id = $(this).data('id');
+      let etablissement = $(this).data('etablissement');
+      $('#id_supprimer').val(invoice_id);
+
+   })
+
+
+
+</script>
+
+
+<script>
+
+   $(document).ready(function(){
+      $("#search").on("keyup", function(){
+         var value = $(this).val().toLowerCase();
+         $("#myTable tr").filter(function(){
+            $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value)>-1)
+         });
+      });
+   });
+
+</script>
+
+{% endblock %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

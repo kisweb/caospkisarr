@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "C:\\python\\python-3.10",
+        "./caosp"
+    ]
+}

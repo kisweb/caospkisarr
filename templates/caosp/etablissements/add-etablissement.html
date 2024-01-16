@@ -1,0 +1,85 @@
+{% extends "layouts/base-caosp.html" %}
+{% load crispy_forms_tags %}
+{% load partials %}
+
+{% block title %} Ajouter un établissement {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<main class="content">
+		<div class="container-fluid p-0">
+
+			<h1 class="h3 mb-3">Ajout</h1>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title mb-0">Empty card</h5>
+						</div>
+						<div class="card-body">
+							<div class="flex flex-col items-center mx-10 md:mx-20">
+								<h1 class="prose-2xl mb-4">College</h1>
+
+								<form method="post class='bootstrap4">
+									{{ form|crispy }}
+								</form>
+							
+								{% comment %} <form class="mb-4" 
+									hx-post="{% url 'add-etablissement' %}"
+									hx-target="#college-table-body"
+									hx-swap="beforeend"
+									hx-on::after-request="this.reset()">
+									
+									<div class="form-control">
+										<label>Etablissement</label>
+										{%  form.etablissement|crispy %}
+									</div>
+									<div class="form-control">
+										<label>Code</label>
+										{%  form.code|crispy%}
+									</div>
+									<div class="form-control">
+										<label>Statut</label>
+										{%  form.statut|crispy %}
+									</div>
+									<div class="form-control">
+										<label>IEF</label>
+										{%  form.ief|crispy %}
+									</div>
+									<div class="form-control">
+										<label>Principal</label>
+										{%  form.nomce|crispy %}
+									</div>
+									<div class="form-control">
+										<label>Email</label>
+										{%  form.email|crispy %}
+									</div>
+									<div class="form-control">
+										<label>Mobile</label>
+										{%  form.mobile|crispy %}
+									</div>
+									<div class="form-control">
+										<label>Fixe</label>
+										{%  form.fixe|crispy %}
+									</div>
+			
+									<button type="submit" class="btn btn-primary mt-2">Submit</button>
+								</form> {% endcomment %}
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

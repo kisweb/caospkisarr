@@ -171,24 +171,24 @@ WSGI_APPLICATION = "caosp.wsgi.application"
 #     }
 # }
 
-# DATABASES = {
-
-#     'default': dj_database_url.parse(config('DATABASE_URL'))
-
-# }
-
 DATABASES = {
 
-    'default': {
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'caospkisarr',
-        'USER': 'kisarr',
-        'PASSWORD': 'kisarr',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
 }
+
+# DATABASES = {
+
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'caospkisarr',
+#         'USER': 'kisarr',
+#         'PASSWORD': 'kisarr',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation

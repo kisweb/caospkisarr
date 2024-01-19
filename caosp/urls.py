@@ -3,13 +3,14 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.urls import path, include
-
+from api.urls import app
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", app.urls),
+    path("__debug__/", include("debug_toolbar.urls")),
     path("", include('account.urls')),
     path("", include('core.urls')),
-    path("iefs/", include('ief.urls')),
-    path("colleges/", include('college.urls')),
+    path("etablissements/", include('etablissement.urls')),
     path("quotes/", include('quote.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

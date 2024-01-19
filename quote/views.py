@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from college.models import College, Quote, get_montant_general
-from college.forms import FilterQuoteAnneeForm
+from etablissement.models import Etablissement, Quote, get_montant_general
+from etablissement.forms import FilterQuoteAnneeForm
 from django.contrib import messages
 
 from django.http import HttpResponse
@@ -22,7 +22,7 @@ from caosp.settings import ANNEES
 
 from django.utils.translation import gettext as _
 """
-college
+etablissement
 annee_scolaire
 effectif
 versement
@@ -57,8 +57,7 @@ class QuoteView(LoginRequiredSuperuserMixim,View):
             quote_annees = request.GET.getlist('quote_annee')
             quote_qs = self.quotes.filter(annee_scolaire__in=quote_annees)
 
-        context = {'quotes': quote_qs.order_by('annee_scolaire', 'college'), 'form': FilterQuoteAnneeForm(), 'annees': ANNEES}
-        print(self.quotes[0].get_montant)
+        context = {'quotes': quote_qs.order_by('annee_scolaire', 'etablissement'), 'form': FilterQuoteAnneeForm(), 'annees': ANNEES}
 
         return render(request, self.templates_name, context=context)
 
@@ -135,7 +134,7 @@ class AddEtablissementView(LoginRequiredSuperuserMixim, View):
         }
 
         try:
-            created = College.objects.create(**data)
+            created = Etablissement.objects.create(**data)
 
             if created:
 
@@ -175,13 +174,12 @@ class AddQuoteView(LoginRequiredSuperuserMixim, View):
             annee = request.POST.get('annee_scolaire')
             versement = request.POST.get('versement')
             effectif = request.POST.get('effectif')
-            save_by = request.POST.get('save_by')
             quote_date_time = request.POST.get('quote_date_time')
             montant = self.get_montant()
             comments = request.POST.get('comments')
              
             quote_object = {
-                'etablissement_id': etablissement,
+                'etablissement': etablissement,
                 'annee_scolaire': annee,
                 'versement': versement,
                 'effectif': effectif,

@@ -55,23 +55,28 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+    "django.contrib.humanize",
     "django_htmx",
     "template_partials",    
     "import_export",
     
     "account",
     "core",
-    "ief",
-    "college",
+    "etablissement",
     'quote',
     'anneescolaire',
+    'debug_toolbar',
+    'django_extensions',
+    'ninja',
+    'corsheaders',
 ]
 # postgres://caosp:8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5@dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com/quoteparts
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -82,6 +87,34 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "caosp.urls"
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 
 # TEMPLATES = [
 #     {
@@ -149,7 +182,7 @@ DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'caospsarr',
+        'NAME': 'caospkisarr',
         'USER': 'kisarr',
         'PASSWORD': 'kisarr',
         'HOST': '127.0.0.1',

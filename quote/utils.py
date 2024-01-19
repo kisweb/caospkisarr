@@ -1,7 +1,7 @@
 
 from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 
-from college.models import Quote
+from etablissement.models import Quote
 
 from .models import *
 

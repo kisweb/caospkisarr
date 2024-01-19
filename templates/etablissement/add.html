@@ -1,0 +1,98 @@
+{% extends 'layouts/base-caosp.html' %}
+
+{% block title %} Ajouter un collège {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<main class="content">
+		<div class="container-fluid p-0">
+
+            <div class="row mb-2 mb-xl-3">
+				<div class="col-auto d-none d-sm-block">
+                    <h3 class="flex ">
+                        <strong>Ajouter un collège</strong>
+                        
+                        <span>
+                            <a class="" href="{% url 'etablissement:index' %}">Retour</a>
+                        </span>
+                        
+                    </h3>
+                </div>
+
+				
+			</div>
+			<div class="card">
+                <div class="card-body">
+                    <div class="m-sm-4">
+                        
+                        <form method="POST" action=".">
+                            {% csrf_token %} 
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="inputFirstName">Etablissement</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="inputLastName">Email de l'Etablissement</label>
+                                    <input type="text" class="form-control" name="email" >
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputFirstName">Téléphone</label>
+                                    <input type="text" class="form-control" name="phone" >
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputLastName">Type d'établissement</label>
+                                    <select class="select-control form-control-lg w-100" name="type_etablissement">
+                                        <option value="">Choisir du type de l'Etablissement</option>
+                                        <option {% if etablissement.type_etablissement == 'college' %} selected {% endif %} value="college">Collège</option>
+                                        <option {% if etablissement.type_etablissement == 'lycee' %} selected {% endif %} value="lycee">Lycée</option>
+                                        <option {% if etablissement.type_etablissement == 'mixte' %} selected {% endif %} value="mixte">Lycée Mixte</option>
+                                        <option {% if etablissement.type_etablissement == 'autre' %} selected {% endif %} value="autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputLastName">IEF</label>
+                                    <select class="select-control form-control-lg w-100" name="ief">
+                                        <option value="">Choix IEF</option>
+                                        <option  value="Bignona1">Bignona 1</option>
+                                        <option  value="Bignona2">Bignona 2</option>
+                                        <option  value="Oussouye">Oussouye</option>
+                                        <option  value="Ziguinchor">Ziguinchor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="address">Adresse du Collège</label>
+                                    <input type="text" class="form-control" name="address">
+                                </div>
+                            
+                            
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="ce">Prénom et Nom du CE</label>
+                                    <input type="text" class="form-control" name="nomce">
+                                </div>
+                                
+                            
+                            </div>
+                            
+                            <button type="submit" class="btn btn-info">Enregistrer les données</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+		</div>
+	</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

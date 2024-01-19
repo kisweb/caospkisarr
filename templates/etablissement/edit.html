@@ -1,0 +1,327 @@
+{% extends "layouts/base-caosp.html" %}
+
+{% block title %} Modifier les données de {{ etablissement.etablissement }} {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>{{ etablissement.name }}</strong></h3>
+            </div>
+            
+            <div class="col-auto ml-auto text-right mt-n1">
+                
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-3 col-xl-2">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Paramètres</h5>
+                    </div>
+
+                    <div class="list-group list-group-flush" role="tablist">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#myetablissement" role="tab">
+                        Collège
+                        </a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#quotepart" role="tab">
+                        Quote-part
+                        </a>
+                        
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#les_quoteparts" role="tab">
+                            Les quotes
+                        </a>
+                        
+                        <span class="list-group-item list-group-item" disabled>
+                        Envoyer Mail
+                        </span>
+                        <span class="list-group-item list-group-item" disabled>
+                        Envoyer SMS
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-xl-10">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="myetablissement" role="tabpanel">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">code : <span class="h4 text-center font-bold">{{etablissement.code}}</span> </h5>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" action=".">
+                                    {% csrf_token %}
+                                    <input type="hidden" class="form-control" name="modification" value="modifier_etablissement">
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="inputFirstName">Etablissement</label>
+                                            <input type="text" class="form-control" name="etablissement" value="{{ etablissement.name}}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="inputLastName">Email de l'Etablissement</label>
+                                            <input type="text" class="form-control" name="email" value="{{ etablissement.email}}">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="inputFirstName">Téléphone</label>
+                                            <input type="text" class="form-control" name="phone" value="{{ etablissement.phone}}">
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="inputLastName">Type d'établissement</label>
+                                            <select class="select-control form-control-lg w-100" name="statut">
+                                                <option value="">Choisir le type de l'Etabmissement</option>
+                                                <option {% if etablissement.type_etablissement == 'Collège' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">College</option>
+                                                <option {% if etablissement.type_etablissement == 'Lycée' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée</option>
+                                                <option {% if etablissement.type_etablissement == 'Mixte' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée Mixte</option>
+                                                <option {% if etablissement.type_etablissement == 'Autre' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Autre</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="inputLastName">IEF</label>
+                                            <select class="select-control form-control-lg w-100" name="ief" id="">
+                                                <option value="">Choisir l'IEF</option>
+                                                <option {% if etablissement.ief == "Bignona1" %} selected {% endif %} value="Bignona1">Bignona 1</option>
+                                                <option {% if etablissement.ief == "Bignona2" %} selected {% endif %} value="Bignona2">Bignona 2</option>
+                                                <option {% if etablissement.ief == "Oussouye" %} selected {% endif %} value="Oussouye">Oussouye</option>
+                                                <option {% if etablissement.ief == "Ziguinchor" %} selected {% endif %} value="Ziguinchor">Ziguinchor</option>                                            </select> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-12">
+                                            <label class="form-label" for="ce">Adresse du Collège</label>
+                                            <input type="text" class="form-control" name="address" value="{{etablissement.address}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="ce">Prénom et Nom du CE</label>
+                                            <input type="text" class="form-control" name="nomce" value="{{etablissement.nomce}}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="ce">Contact du CE</label>
+                                            <input type="text" class="form-control" name="slug" value="{{etablissement.slug}}">
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="ce">Ajouté par</label>
+                                            <input type="text" class="form-control" name="save_by" value="{{ etablissement.save_by.first_name}} {{ etablissement.save_by.last_name}}" disabled>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="ce">Conseiller responsable</label>
+                                            <input type="text" class="form-control" name="conseiller" value="{{ etablissement.conseiller.name}}" disabled>
+                                        </div>
+                                    
+                                    </div>
+                                    <button type="submit" class="btn btn-info">Enregistrer les changements</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="quotepart" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Collège : <strong>{{ etablissement.slug }}</strong> - code : <span class="h4 text-center font-bold">({{ etablissement.code}})</span> </h5>
+                                </div>                                
+                                <form method="POST" action=".">
+                                    {% csrf_token %} 
+                                    <input type="hidden" class="form-control" name="modification" value="modifier_quote">
+                                    <div class="row">
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="inputLastName">Année scolaire</label>
+                                            <select class="select-control form-control-lg w-100" name="anneescolaire" id="">
+                                                <option value="">Choisir</option>
+                                                {% for annee in annees %}
+                                                
+                                                <option {% if quote.annee_scolaire == annee %} selected {% endif %} value="{{ annee }}"> {{ annee }} </option>
+                                                {% endfor %}
+                                            </select> 
+                                        </div>
+                                        <div class="mb-3 col-md-2">
+                                            <label class="form-label" for="effectif">Effectif</label>
+                                            <input type="text" class="form-control" name="effectif" value="{{quote.effectif}}">
+                                        </div>
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label" for="ce">Montant du</label>
+                                            <input disabled type="text" class="form-control" name="montant_du" value="{{quote.get_montant}}">
+                                        </div>
+                                        <div class="mb-3 col-md-3">
+                                            <label class="form-label" for="ce">Versé</label>
+                                            <input type="text" class="form-control" name="versement" value="{{quote.versement}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label" for="ce">Payé</label>
+                                            <div>
+                                                <label class="form-check-inline">
+                                                    <input {% if quote.paid == True %} checked {% endif %} class="form-check-input" type="radio" value="True" name="paid">
+                                                    <span class="form-check-label">
+                                                        Oui
+                                                    </span>
+                                                </label>
+                                                <label class="form-check-inline">
+                                                    <input {% if quote.paid == False %} checked {% endif %} class="form-check-input" type="radio" value="False" name="paid">
+                                                    <span class="form-check-label">
+                                                        Non
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        <div  class="mb-3 col-md-8">
+                                            <label class="form-label" for="ce">Est à jour</label>
+                                            <div>
+
+                                                <label class="form-check-inline">
+                                                    <input {% if quote.is_ok == True %} checked {% endif %} class="form-check-input" type="radio" value="True" name="is_ok">
+                                                    <span class="form-check-label">
+                                                        Oui
+                                                    </span>
+                                                </label>
+                                                <label class="form-check-inline">
+                                                    <input {% if quote.is_ok == False %} checked {% endif %} class="form-check-input" type="radio" value="False" name="is_ok">
+                                                    <span class="form-check-label">
+                                                        Non
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="ce">Ajouté par</label>
+                                            <input type="text" class="form-control" name="added_by" value="{{ etablissement.added_by.name}}" disabled>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label" for="ce">Conseiller responsable</label>
+                                            <input type="text" class="form-control" name="conseiller" value="{{ etablissement.conseiller.name}}" disabled>
+                                        </div>
+                                    
+                                    </div>
+                                    <button type="submit" class="btn btn-info">Enregistrer les changements</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="les_quoteparts" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="m-sm-4">
+                                    <table class="table table-sm">
+                                      <thead>
+                                        <tr>
+                                          <th>Année</th>
+                                          <th>Effectif</th>
+                                          <th>Versé</th>
+                                          <th>is_ok</th>
+                                          <th>Ajouté le</th>
+                                          <th>Changé le</th>
+                                          <th class="text-right">Actions</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {% for quote in lesquotes %}
+                                        <tr>
+                                          <td>{{ quote.annee_scolaire }}</td>
+                                          <td>{{ quote.effectif }}</td>
+                                          <td>{{ quote.versement }}</td>
+                                          <td class="text-left">{{ quote.is_ok }}</td>
+                                          <td class="text-left">{{ quote.quote_date_time|date:"d/m/Y H:i" }}</td>
+                                          <td class="text-left">{{ quote.last_updated_date|date:"d/m/Y H:i" }}</td>
+                                          <td class="text-right">
+                                            <span class="float-right">
+                                                <button id="btn-quote-sup" type="button" data-toggle="modal" data-target="#supprimer"
+                                                   class="btn btn-outline-danger text-blue-600" title="Supprimer" data-id="{{ quote.id }}"
+                                                   data-quote="{{quote.annee}}">
+                                                   <i class="align-middle mr-2" data-feather="alert-triangle"></i>
+                                                   Delete
+                                                </button>
+                              
+                                             </span>
+                                            <a
+                                              href="#"
+                                              class="btn btn-warning"
+                                              >Supprimer</a
+                                            >
+                                          </td>
+                                        </tr>
+                                        {% endfor %}
+                                      </tbody> 
+                                    </table>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+<!-- Modal suppression -->
+<div class="modal fade" id="supprimer" tabindex="-1" role="dialog" aria-labelledby="sexampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-dark h3" id="sexampleModalLabel">Suppression du quote-part {{ quote.annee_scolaire }} de {{ etablissement.name }}
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form method="POST" >
+               {% csrf_token %}
+               <input name="id_supprimer_quote" type="hidden" value="yes">
+               <input name="quote_id" type="hidden" value="{{ quote.slug }}">
+               <label id="label_id_s" class="h4 text-dark checkbox-inline"> 
+                    Etes-vous sûr de
+                     vouloir supprimer le quote-part <strong>{{ quote.slug }} ? 
+                    </strong>
+                </label>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger">Delete</button>
+               </div>
+            </form>
+         </div>
+
+      </div>
+   </div>
+</div>
+<!-- end modal-->
+
+
+{% endblock content %}
+
+<script>
+
+function confirmDelete(){
+    return confirm("Are you sure you want to delete this file?");
+}
+</script>
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}

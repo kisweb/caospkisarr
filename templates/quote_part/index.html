@@ -8,17 +8,24 @@
 {% load static %}
 
 {% block content %}
-
+<style>
+    @media print {
+    .no-print { display: none!important }
+ }
+ @media not print {
+    .print { display: none!important }
+ }
+</style>
 <main class="content">
    <div class="container-fluid p-0">
 
-       <div class="row mb-2 mb-xl-3">
+       <div class="no-print row mb-2 mb-xl-3">
            <div class="col-auto d-none d-sm-block">
                <h3>
                    <strong>Les Quote-parts</strong>
                    {% if request.user.is_staff %}
                    <span>
-                       <a class="" href="{% url 'college:add' %}">Ajouter</a>
+                       <a class="" href="{% url 'etablissement:add' %}">Ajouter</a>
                    </span>
                    {% endif %}
                    <form class="d-none d-lg-inline-block" method="GET">
@@ -32,24 +39,11 @@
                       </div>
                    </form>
                </h3>
-           </div>
-           
-
-           <div class="col-auto ml-auto text-right mt-n1">
-               <nav aria-label="breadcrumb">
-                   <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-                       <li class="breadcrumb-item"><a href="#">CAOSP</a></li>
-                       <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
-                       <li class="breadcrumb-item active" aria-current="page">colleges</li>
-                   </ol>
-               </nav>
-           </div>
-       </div>
-       
+           </div>       
        
        <div class="card">
             <div class="card-header">
-               <button onclick="window.print()" class="btn btn-primary float-right">
+               <button onclick="window.print()" class="no-print btn btn-primary float-right">
                   Imprimer
                </button>
                <h2 class="h2">
@@ -74,7 +68,7 @@
                         {% for quote in quotes%}
                         <tr>
                            <td>{{ quote.annee_scolaire }}</td>
-                           <td>{{quote.college.etablissement}}</td>
+                           <td>{{quote.etablissement}}</td>
                            <td>{{quote.effectif}}</td>
                            <td>{{quote.get_montant}}</td>
                            <td>{{quote.versement}}</td>
@@ -85,7 +79,9 @@
                               <span class="text-white bg-danger px-3 rounded-radius-25"> <i class="mdi mdi-arrow-bottom-right"></i> Oh ! </span>
                               {% endif %}
                            </td>                           
-                           <td class="text-right">A compléter</td>
+                           <td class="text-right">
+                              A compléter
+                           </td>
                         </tr>
                         {% endfor%}
                        </tbody>

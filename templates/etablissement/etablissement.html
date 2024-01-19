@@ -1,0 +1,104 @@
+{% extends 'layouts/base-caosp.html' %}
+
+{% block title %} {{ etablissement.etablissement}} {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<main class="content">
+   <div class="container-fluid p-0">
+      <div class="col-12 col-md-8 mx-auto">
+         <div class="card p-12">
+
+            <div class="mx-4 mt-4 flex-container">
+               <span class="h1">{{etablissement.name}}</span>
+               <span class="h3 float-right"> Code : {{etablissement.code}}</span>
+            </div>
+            <div class="card-body  p-12">
+               <div class="m-sm-4">
+                  <div class="mb-2">
+                     <div class="flex-grow-1">
+                        <strong class="float-right text-navy">IEF : {{etablissement.ief}}</strong>
+                        <strong>Académie : </strong>IA de Ziguinchor<br />
+                        <strong class="float-right text-navy">Téléphone : {{etablissement.phone}}</strong>
+                        <strong>Email : </strong> {{etablissement.email}}<br />
+                        <strong class="float-right text-navy">Adresse : {{etablissement.address}}</strong>
+                        <strong class="">Type : {{etablissement.type_etablissement}} </strong><br />
+                        <strong>Chef d'établissement : {{etablissement.nomce}}</strong><br />
+                     </div>
+                  </div>
+               </div>
+               <div class="m-sm-4">
+                  <div class="mb-2">
+                     <div class="flex-grow-1">
+                        <strong> : </strong> {{etablissement.quote_set.count}}<br />
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="mx-10 m-4">
+               <a href="{% url 'etablissement:index'%} " class="btn btn-outline-primary">Retour</a>
+               {% if request.user.is_staff %}
+               <a href=" {% url 'etablissement:edit' etablissement.slug %} " class="btn btn-info">Editer</a>
+               <a href=" {% url 'etablissement:edit' etablissement.slug %} " class="btn btn-success">Nouveau quotepart</a>
+               <span class="float-right">
+                  <button id="btn-etablissement-sup" type="button" data-toggle="modal" data-target="#supprimer"
+                     class="btn btn-outline-danger text-blue-600" title="Supprimer" data-id="{{ etablissement.slug }}"
+                     data-etablissement="{{etablissement.name}}">
+                     <i class="align-middle mr-2" data-feather="alert-triangle"></i>
+                     Delete
+                  </button>
+
+               </span>
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</main>
+
+
+<!-- Modal suppression -->
+<div class="modal fade" id="supprimer" tabindex="-1" role="dialog" aria-labelledby="sexampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-dark h3" id="sexampleModalLabel">Suppression de {{ etablissement.name }}
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form method="POST">
+               {% csrf_token %}
+               <input name="id_supprimer" type="hidden" value="yes">
+               <label id="label_id_s" class="h4 text-dark checkbox-inline"> <strong>Etes-vous sûr de
+                     vouloir supprimer les données de : </strong></label></br> {{ etablissement.name }} ?
+
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger">Delete</button>
+               </div>
+            </form>
+         </div>
+
+      </div>
+   </div>
+</div>
+<!-- end modal-->
+
+<br><br>
+
+{% endblock content %}
+
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

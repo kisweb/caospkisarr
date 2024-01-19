@@ -1,0 +1,71 @@
+{% extends 'layouts/base-caosp.html' %} 
+{% block title %} 
+  Liste des établissements
+{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} 
+{% block content %} 
+{% load static %}
+
+<main class="content">
+  <div class="container-fluid p-0">
+    <div class="row mb-1 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        {% if request.user.is_staff %}
+        <span class="float right">
+          <a class="btn btn-outline-info" href="{% url 'etablissement:add' %}">Ajouter</a>
+        </span>
+        {% endif %}
+
+      </div>
+
+       
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="m-sm-4">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Etablissement</th>
+                <th>Code</th>
+                <th>IEF</th>
+                <th>Type</th>
+                <th>Téléphone</th>
+                <th>Conseiller</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for etablissement in etablissements %}
+              <tr>
+                <td>{{ etablissement.name }}</td>
+                <td>{{ etablissement.code }}</td>
+                <td>{{ etablissement.ief }}</td>
+                <td>{{ etablissement.type_etablissement }}</td>
+                <td class="text-left">
+                  {{etablissement.phone}}
+                </td>
+                <td class="text-right">
+                  <a
+                    href=" {% url 'etablissement:etablissement' etablissement.slug %} "
+                    class="btn btn-warning"
+                    >Consulter</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

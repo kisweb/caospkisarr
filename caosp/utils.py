@@ -25,7 +25,7 @@ MAX_UPLOAD_SIZE = "5242880"
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
+ 
 def unique_key_generator(instance):
     size = random.randint(30, 45)
     key_id = random_string_generator(size=size)

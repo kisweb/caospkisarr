@@ -64,16 +64,15 @@ class Quote(models.Model):
 
 
     etablissement = models.ForeignKey(
-        Etablissement, related_name="quoteparts", on_delete=models.CASCADE
+        Etablissement, on_delete=models.CASCADE
     )
     annee_scolaire = models.ForeignKey(
-        AnneeScolaire, related_name="quotes", on_delete=models.CASCADE, null=True
+        AnneeScolaire, on_delete=models.CASCADE, null=True
     )
     slug = models.SlugField(max_length=130)
     effectif = models.IntegerField(null=False, blank=False, default=0)
     versement = models.IntegerField(null=False, blank=False, default=0)
-    montant = models.IntegerField(null=False, blank=False, default=0)
-    save_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT)
+    save_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     quote_date_time = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(null=True, blank=True, auto_now=True)
     paid = models.BooleanField(default=False)
@@ -119,7 +118,7 @@ def get_montant_general(annee:str=None, ief:str=None, **kwargs):
     return montant_general
 
 def nombre_etablissement_ief(annee:str=None, ief:str=None):
-    etablissements = Etablissement.objects.filter(ief=ief, annee= AnneeScolaire.get_annee_en_cours()),
+    etablissements = Etablissement.objects.filter(ief=ief, annee=AnneeScolaire.get_annee_en_cours()),
 
 def createQuote(sender, instance, created, **kwargs):
     if created:

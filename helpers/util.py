@@ -155,9 +155,9 @@ def generate_username(self, full_name, Model):
     name = name.split(' ')
     lastname = name[-1]
     firstname = name[0]
-    self.username = '%s%s' % (firstname[0], lastname)
+    self.username = '%s.%s' % (firstname, lastname)
     if Model.objects.filter(username=self.username).count() > 0:
-        username = '%s%s' % (firstname, lastname[0])
+        username = '%s.%s' % (firstname, lastname)
         if Model.objects.filter(username=self.username).count() > 0:
             users = Model.objects.filter(username__regex=r'^%s[1-9]{1,}$' % firstname).order_by(
                 'username').values(
@@ -167,9 +167,9 @@ def generate_username(self, full_name, Model):
                     map(lambda x: int(x['username'].replace(firstname, '')), users))
                 last_number_used = last_number_used[-1]
                 number = last_number_used + 1
-                self.username = '%s%s' % (firstname, number)
+                self.username = '%s.%s%s' % (firstname,lastname, number)
             else:
-                self.username = '%s%s' % (firstname, 1)
+                self.username = '%s.%s%s' % (firstname, lastname, 1)
     return self.username
 
 

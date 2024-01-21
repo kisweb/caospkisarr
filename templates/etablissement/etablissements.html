@@ -1,43 +1,30 @@
-{% extends 'layouts/base-caosp.html' %} 
-{% block title %} 
-  Liste des établissements
-{% endblock %}
+{% extends 'layouts/base-caosp.html' %} {% block title %} Liste des
+établissements {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %} 
-{% block content %} 
-{% load static %}
+{% block content %} {% load static %}
 
 <main class="content">
   <div class="container-fluid p-0">
-    <div class="row mb-1 mb-xl-3">
-      <div class="col-auto d-none d-sm-block">
-        {% if request.user.is_staff %}
-        <span class="float right">
-          <a class="btn btn-outline-info" href="{% url 'etablissement:add' %}">Ajouter</a>
-        </span>
-        {% endif %}
-
-      </div>
-
-       
-    </div>
-
     <div class="card">
       <div class="card-body">
         <div class="m-sm-4">
           <table class="table table-sm">
             <thead>
               <tr>
+                <th>#</th>
                 <th>Etablissement</th>
                 <th>Code</th>
                 <th>IEF</th>
                 <th>Type</th>
+                <th>Email</th>
                 <th>Téléphone</th>
-                <th>Conseiller</th>
+                <th>Quotepart</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
+            {% comment %}
             <tbody>
               {% for etablissement in etablissements %}
               <tr>
@@ -45,9 +32,8 @@
                 <td>{{ etablissement.code }}</td>
                 <td>{{ etablissement.ief }}</td>
                 <td>{{ etablissement.type_etablissement }}</td>
-                <td class="text-left">
-                  {{etablissement.phone}}
-                </td>
+                <td class="text-left">{{etablissement.phone}}</td>
+                <td>{{ etablissement.id }}</td>
                 <td class="text-right">
                   <a
                     href=" {% url 'etablissement:etablissement' etablissement.slug %} "
@@ -58,9 +44,105 @@
               </tr>
               {% endfor %}
             </tbody>
+            {% endcomment %}
+            <tbody id="myTable">
+              {% if etablissements %} 
+                  {% for etab in etablissements %}
+                  <tr>
+                      <th scope="row">{{ etab.pk }}</th>
+                      <td>{{etab.name}}</td>
+                      <td>{{ etab.code }}</td>
+                      <td>{{etab.ief}}</td>
+                      <td>{{etab.type_etablissement}}</td>
+                      <td>{{ etab.email }}</td>
+                      <td>{{ etab.phone }}</td>
+                      <td>{{ etab.quoteparts.last.get_montant }}</td>
+                      <td>
+                        <a href="{% url 'etablissement:edit' etab.slug %} " title="Detail" class="badge text-white bg-success float-right"
+                          >Voir</a
+                        >
+                      </td>
+                  </tr>
+                  {% endfor %}
+              {% if etablissements.has_other_pages %}
+              <div class="btn-group float-right mb-3" role="group" aria-label="Item pagination">
+                  {% if etablissements.has_previous %}
+                    <a
+                      href="?page={{ etablissements.previous_page_number }}"
+                      class="btn btn-outline-primary">
+                        &laquo;
+                    </a>
+                  {% endif %} 
+                  {% for page_number in etablissements.paginator.page_range %} 
+                      {% if etablissements.number == page_number %}
+                          <button class="btn btn-outline-primary active">
+                              <span>
+                                  {{page_number}} 
+                                  <span class="sr-only">(current)</span>
+                              </span>
+                          </button>
+                      {% else %}
+                          <a href="?page={{page_number}}" class="btn btn-outline-primary">
+                              {{ page_number }}
+                          </a>
+                      {% endif %} 
+                  {% endfor %} 
+                {% if etablissements.has_next %}
+                <a
+                  href="?page={{ etablissements.next_page_number }}"
+                  class="btn btn-outline-primary"
+                  >&laquo;</a
+                >
+                {% endif %}
+              </div>
+
+              {% endif %}
+            {% else %}
+
+              <p class="text-center text-white">No etab found.</p>
+              {% endif %}
+            </tbody>
           </table>
-        </div>
+        
       </div>
+      </div>
+                  {% comment %}
+                  <div class="card-footer d-flex align-items-center">
+                    <ul class="pagination m-0 ms-auto">
+                      <li class="page-item page-prev">
+                        {% if etablissements.has_previous %}
+                        <a
+                          class="page-link"
+                          href="?page={{ etablissements.previous_page_number }}"
+                          >Previous</a
+                        >
+                        {% else %}
+                        <a class="page-link">Previous</a>
+                        {% endif %}
+                      </li>
+                      {% for i in etablissements.paginator.page_range %}
+                      <li class="page-item">
+                        {% if etablissements.number == i %}
+                        <a class="page-link active" href="#">{{ i }} </a>
+                        {% else %}
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        {% endif %}
+                      </li>
+                      {% endfor %}
+                      <li class="page-item">
+                        {% if etablissements.has_next %}
+                        <a
+                          class="page-link"
+                          href="?page={{ etablissements.next_page_number }}"
+                          >Next</a
+                        >
+                        {% else %}
+                        <a class="page-link">Next</a>
+                        {% endif %}
+                      </li>
+                    </ul>
+                  </div>
+                  {% endcomment %}
     </div>
   </div>
 </main>

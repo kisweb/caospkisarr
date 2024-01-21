@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI
+from django.contrib.admin.views.decorators import staff_member_required
 
 from account.models import User
 from etablissement.models import Etablissement, Quote
@@ -17,8 +18,22 @@ from .schemas import (
     QuoteSchema,
 )
 
-app = NinjaAPI()
+app = NinjaAPI(
+        docs_decorator=staff_member_required,
+        
+        openapi_extra={
+            "info": { "termsOfService": "https://example.com/terms/", }
+            },
+        title="CAOSP API",
+        description="Les données brutes de CAOSP de Ziguinchor pour la gestion des quoteparts"
+    )
 
+
+
+@app.get("users/", response=list[UserSchema])
+def get_users(request):
+    users = User.objects.all()
+    return users
 
 @app.get("profiles/", response=list[ProfileSchema])
 def get_profiles(request):

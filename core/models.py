@@ -28,6 +28,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
+    username = models.CharField(max_length=255, null=True)
     bio = models.TextField(max_length=500, blank=True)
     phone_number = models.CharField(max_length=12, blank=True)
     birth_date = models.DateField(null=True, blank=True)

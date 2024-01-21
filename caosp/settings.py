@@ -65,7 +65,6 @@ INSTALLED_APPS = [
     "etablissement",
     'quote',
     'anneescolaire',
-    'debug_toolbar',
     'django_extensions',
     'ninja',
     'corsheaders',
@@ -73,7 +72,6 @@ INSTALLED_APPS = [
 # postgres://caosp:8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5@dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com/quoteparts
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -109,12 +107,6 @@ CORS_ALLOW_HEADERS = (
     "x-csrftoken",
     "x-requested-with",
 )
-
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
 
 # TEMPLATES = [
 #     {
@@ -171,24 +163,24 @@ WSGI_APPLICATION = "caosp.wsgi.application"
 #     }
 # }
 
-DATABASES = {
-
-    'default': dj_database_url.parse(config('DATABASE_URL'))
-
-}
-
 # DATABASES = {
 
-#     'default': {
+#     'default': dj_database_url.parse(config('DATABASE_URL'))
 
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'caospkisarr',
-#         'USER': 'kisarr',
-#         'PASSWORD': 'kisarr',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
 # }
+
+DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'caospkisarr',
+        'USER': 'kisarr',
+        'PASSWORD': 'kisarr',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation

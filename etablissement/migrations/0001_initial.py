@@ -94,7 +94,6 @@ class Migration(migrations.Migration):
                 ("slug", models.SlugField(max_length=130)),
                 ("effectif", models.IntegerField(default=0)),
                 ("versement", models.IntegerField(default=0)),
-                ("montant", models.IntegerField(default=0)),
                 ("quote_date_time", models.DateTimeField(auto_now_add=True)),
                 ("last_updated_date", models.DateTimeField(auto_now=True, null=True)),
                 ("paid", models.BooleanField(default=False)),

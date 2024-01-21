@@ -1,0 +1,4 @@
+id;name;slug;code;ief;type_etablissement;nomce;email;phone;address;created_date;save_by_id
+1;CEM Ahoune SANE;cem-ahoune-sane;EUbxWm;Bignona1;Collège;Germaine Gomis;cemas@gmail.com;33 994 18 04;Bignona Commune;2024-01-19 19:46:55.777882+00;1
+3;CEM Malick Fall;cem-malick-fall;M@l1cK;Ziguinchor;Collège;Sambou Ndour;malick@caosp.zig;339911346;Ziguinchor;2024-01-19 22:18:59.150059+00;1
+5;Lycée Ahoune SANE;lycee-ahoune-sane;L1c33@Sb;Bignona1;Lycée;Proviseur KABO;lasb@caosp.zig;33 994 00 00;Bignona;2024-01-20 10:33:49.894787+00;3

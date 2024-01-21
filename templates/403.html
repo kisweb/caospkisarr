@@ -1,4 +1,4 @@
-{% extends "layouts/base-fullscreen.html" %}
+{% extends "layouts/base-caosp.html" %}
 
 {% block title %} Error 403 {% endblock %} 
 
@@ -7,36 +7,38 @@
 
 {% block content %}
 
-    <!-- Section -->
-	<main class="d-flex w-100">
-		<div class="container d-flex flex-column">
-			<div class="row vh-100">
+<main class="content">
+	<div class="container-fluid p-0">
+
+			<div class="row">
 				<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
 					<div class="d-table-cell align-middle">
 
-						<div class="text-center mt-4">
+						<div class="text-center mt-10">
 							<h1 class="h2">
-                                Error 403
+                                Accès interdit à {{ request.user.name }}
                             </h1>
-							<p class="lead">
-								Access denied - please contact support or authenticate.
-							</p>
+							<h3 class="lead">
+								Votre rôle de "{{ request.user.profile.role }}" ne permet pas de voir ces informations.
+							</h3>
 						</div>
 
-						<div class="card">
-							<div class="card-body">
-                                    <div class="text-center mt-3">
-                                        <a href="{% url 'account:login' %}" 
-										   class="btn btn-lg btn-primary">LOGIN</a>
-                                        <!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
-                                    </div>
-								</div>
+						<div class="card mt-6">
+							<div class="card-body bg-danger">
+                                    <h2 class="font-size-96 font-bold text-center mt-2 text-white">
+                                        Veuillez contacter le Directeur
+                                    </h2>
+                                    <h5 class="font-size-96 font-bold text-center mt-2 text-white">
+                                        Email: caosp@caosp.zig - Phone: 33 991 11 59
+                                    </h5>
+
 							</div>
 						</div>
 
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</main>
 

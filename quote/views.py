@@ -45,7 +45,8 @@ class QuoteView(LoginRequiredSuperuserMixim,View):
     quotes = Quote.objects.all().order_by('-quote_date_time')
     
     context = {
-        'quotes': quotes
+        'quotes': quotes,
+        'segment': 'quote-list'
     }
 
     def get(self, request, *args, **kwags):
@@ -57,7 +58,7 @@ class QuoteView(LoginRequiredSuperuserMixim,View):
             quote_annees = request.GET.getlist('quote_annee')
             quote_qs = self.quotes.filter(annee_scolaire__in=quote_annees)
 
-        context = {'quotes': quote_qs.order_by('annee_scolaire', 'etablissement'), 'form': FilterQuoteAnneeForm(), 'annees': ANNEES}
+        context = {'segment': 'quote-list', 'quotes': quote_qs.order_by('annee_scolaire', 'etablissement'), 'form': FilterQuoteAnneeForm(), 'annees': ANNEES}
 
         return render(request, self.templates_name, context=context)
 
@@ -175,7 +176,6 @@ class AddQuoteView(LoginRequiredSuperuserMixim, View):
             versement = request.POST.get('versement')
             effectif = request.POST.get('effectif')
             quote_date_time = request.POST.get('quote_date_time')
-            montant = self.get_montant()
             comments = request.POST.get('comments')
              
             quote_object = {
@@ -185,7 +185,6 @@ class AddQuoteView(LoginRequiredSuperuserMixim, View):
                 'effectif': effectif,
                 'save_by': request.user,
                 'quote_date_time': quote_date_time,
-                'montant': montant,
                 'comments': comments
             }
 

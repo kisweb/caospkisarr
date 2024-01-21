@@ -1,7 +1,10 @@
-import datetime
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import datetime, timedelta
+from django.db.models import Subquery, OuterRef
 from anneescolaire.models import AnneeScolaire
 
 from quote.decorators import superuser_required
@@ -16,7 +19,27 @@ from caosp.utils import unique_slug_generator
 
 
 def etablissements(request):
-    etablissements = Etablissement.objects.all()
+    # last_year = datetime.now() - timedelta(days=365)
+    # Using Subquery
+    # recent_etablissements = Etablissement.objects.filter(created_date__gte=last_year)
+    
+    # authors_with_recent_books = Author.objects.filter(id__in=Subquery(recent_books.values('author_id')))
+
+    lesetabs = Etablissement.objects.all().order_by('id')
+    page_num = request.GET.get('page', 1)
+    per_page = int(request.GET.get('per_page', 10))
+    paginator = Paginator(lesetabs, per_page) # 10 établissement per page
+
+
+    try:
+        etablissements = paginator.page(page_num)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        etablissements = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        etablissements = paginator.page(paginator.num_pages)
+        
     return render(request, 'etablissement/etablissements.html', {
         'etablissements': etablissements,
         'segment': 'etablissement-list'
@@ -57,6 +80,24 @@ def etablissement(request, slug):
         'annees': ANNEES
     })
 
+
+def monEtablissement(request):
+    # quotes = Quote.select_related('etablissement', 'save_by').get(etablissement=pk)
+    mail = request.user.email.split('@')[0]
+    # email = mail+'@caosp.zig'
+    # print(mail)
+    if Etablissement.objects.get(slug=mail).exists():
+        
+        messages.success(request,  f"Les données de '{etablissement.name}' ne peuvent être affichées.")
+    
+        return render(request, 'etablissements.html')
+    
+    context = {
+        'etablissement': etablissement,
+        'annees': ANNEES        
+    }
+    return redirect(f'/etablissement/{mail}', context=context)
+    
 
 def add(request):
     lesusers = User.objects.all()
@@ -111,10 +152,10 @@ def edit(request, slug):
             return redirect(f'/etablissements/')
         
         if request.POST.get('modification') == 'modifier_quote':
-            annee = request.POST.get('anneescolaire')
+            annee_id = request.POST.get('anneescolaire')
+            annee = AnneeScolaire.objects.get(id=annee_id)
             effectif = request.POST.get('effectif')
             versement = request.POST.get('versement')
-            montant = quote.get_montant
             paid = request.POST.get('paid')
             is_ok = request.POST.get('is_ok')
             comments = request.POST.get('comments')
@@ -122,7 +163,6 @@ def edit(request, slug):
                 quote.annee_scolaire = annee
                 quote.effectif = effectif
                 quote.versement =versement
-                quote.montant= montant
                 quote.paid = paid
                 quote.is_ok = is_ok
                 quote.comments = comments
@@ -134,7 +174,6 @@ def edit(request, slug):
             annee_scolaire_new = request.POST.get('annee_scolaire_new')
             effectif_new = request.POST.get('effectif_new')
             versement_new = request.POST.get('versement_new')
-            montant_new = quote.get_montant
             paid_new = request.POST.get('paid_new')
             is_ok_new = request.POST.get('is_ok_new')
             comments_new = request.POST.get('comments_new')
@@ -145,7 +184,6 @@ def edit(request, slug):
                 annee_scolaire = annee_scolaire_new,
                 effectif = effectif_new,
                 versement =versement_new,
-                montant= montant_new,
                 paid = paid_new,
                 is_ok = is_ok_new,
                 comments = comments_new,

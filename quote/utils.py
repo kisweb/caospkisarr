@@ -38,7 +38,7 @@ def get_quote(pk):
 
     obj = Quote.objects.get(pk=pk)
 
-    articles = obj.article_set.all()
+    articles = obj.etablissement.all()
 
     context = {
         'obj': obj,

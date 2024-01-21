@@ -1,12 +1,13 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 
 from .models import Etablissement, Quote
-        
-class AdminEtablissement(admin.ModelAdmin):
+
+
+class AdminEtablissement(ImportExportModelAdmin):
     list_display = (
-        'name',
         'slug',
         'code',
         'ief',
@@ -14,7 +15,6 @@ class AdminEtablissement(admin.ModelAdmin):
         'nomce',
         'email',
         'phone',
-        'address',
     )
 class AdminQuote(admin.ModelAdmin):
     list_display = (

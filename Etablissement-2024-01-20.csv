@@ -1,0 +1,130 @@
+id;name;slug;code;ief;type_etablissement;nomce;email;phone;address;created_date;save_by
+6;CEM AHOUNE SANE;cem-ahoune-sane;iE0HoAXl;Bignona1;Collège;Principal CEM;ahoune.sane@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+7;CEM ARFANG BESSIRE SONKO;cem-arfang-bessire-sonko;soeSMQZu;Bignona1;Collège;Principal CEM;arfang.bessire.sonko@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+8;CEM BADIOURE;cem-badioure;FBKYgwge;Bignona1;Collège;Principal CEM;badioure@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+9;CEM BAILA;cem-baila;BElnGXJS;Bignona1;Collège;Principal CEM;baila@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+10;CEM BRINDIAGO;cem-brindiago;8HNuby9P;Bignona1;Collège;Principal CEM;brindiago@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+11;CEM COUBALAN;cem-coubalan;vwGCTUAd;Bignona1;Collège;Principal CEM;coubalan@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+12;CEM COUBANAO;cem-coubanao;iQnskHPL;Bignona1;Collège;Principal CEM;coubanao@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+13;CEM DIANGO;cem-diango;umPYOOnV;Bignona1;Collège;Principal CEM;diango@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+14;CEM DJIBIDIONE;cem-djibidione;XDFVvMxN;Bignona1;Collège;Principal CEM;djibidione@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+15;CEM MAMPALAGO;cem-mampalago;FMFqGE8c;Bignona1;Collège;Principal CEM;mampalago@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+16;CEM NDIEBA;cem-ndieba;BHGTTWmp;Bignona1;Collège;Principal CEM;ndieba@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+17;CEM NIAMONE 1;cem-niamone-1;qutUcyKB;Bignona1;Collège;Principal CEM;niamone1@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+18;CEM NIAMONE 2;cem-niamone-2;9gk0Byo5;Bignona1;Collège;Principal CEM;niamone2@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+19;CEM NIANKITTE;cem-niankitte;RtMPZVHg;Bignona1;Collège;Principal CEM;niankitte@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+20;CEM OULAMPANE;cem-oulampane;9zrAfoS5;Bignona1;Collège;Principal CEM;oulampane@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+21;CEM OUONCK;cem-ouonck;6b0ypd1A;Bignona1;Collège;Principal CEM;ouonck@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+22;CEM SINDIAN;cem-sindian;B3eTghu7;Bignona1;Collège;Principal CEM;sindian@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+23;CEM SITOUKENE;cem-sitoukene;tju3GX7w;Bignona1;Collège;Principal CEM;sitoukene@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+24;CEM SORBONNE;cem-sorbonne;H4AeI5Gp;Bignona1;Collège;Principal CEM;sorbonne@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+25;CEM SOUDA;cem-souda;PCZdtwns;Bignona1;Collège;Principal CEM;souda@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+26;CEM SOUTOU;cem-soutou;w9ioYDUa;Bignona1;Collège;Principal CEM;soutou@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+27;CEM SUELLE;cem-suelle;pK4auvBB;Bignona1;Collège;Principal CEM;suelle@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+28;CEM TENDIEME;cem-tendieme;HfLnB3Y2;Bignona1;Collège;Principal CEM;tendieme@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+29;CEM TENGHORY ARR;cem-tenghory-arr;bIMKC8EI;Bignona1;Collège;Principal CEM;tenghory.arr@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+30;CEM TENGHORY TRANSG;cem-tenghory-transg;qXZUspBm;Bignona1;Collège;Principal CEM;tenghory.transg@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+31;CEM TOBOR;cem-tobor;aRVoMzeh;Bignona1;Collège;Principal CEM;tobor@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;1
+32;CEM ABENE;cem-abene;X9N3P3aw;Bignona2;Collège;Principal CEM;abene@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+33;CEM AFFINIAM;cem-affiniam;m2K28vui;Bignona2;Collège;Principal CEM;affiniam@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+34;CEM BADIANA;cem-badiana;273Dnlvy;Bignona2;Collège;Principal CEM;badiana@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+35;CEM BALINGORE;cem-balingore;2Dozq9nA;Bignona2;Collège;Principal CEM;balingore@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+36;CEM BANDJIKAKY;cem-bandjikaky;CW4Ft9uZ;Bignona2;Collège;Principal CEM;bandjikaky@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+37;CEM BARANLIR;cem-baranlir;OziubkGp;Bignona2;Collège;Principal CEM;baranlir@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+38;CEM BITI BITI;cem-bitibiti;TJ4A46LA;Bignona2;Collège;Principal CEM;bitibiti@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+39;CEM DARSALAM CHERIF;cem-darsalam-cherif;WXFRllvG;Bignona2;Collège;Principal CEM;darsalam.cherif@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+40;CEM DIANKI;cem-dianki;cwrnNYod;Bignona2;Collège;Principal CEM;dianki@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+41;CEM DIANNAH;cem-diannah;BfbZDl6O;Bignona2;Collège;Principal CEM;diannah@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+42;CEM DIATOCK;cem-diatock;smcOhdpt;Bignona2;Collège;Principal CEM;diatock@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+43;CEM DIEGOUNE;cem-diegoune;lFsgeSdT;Bignona2;Collège;Principal CEM;diegoune@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+44;CEM DIOULOULOU;cem-diouloulou;y1cmmlXx;Bignona2;Collège;Principal CEM;diouloulou@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+45;CEM DJINAKY;cem-djinaky;aP3K3P8Y;Bignona2;Collège;Principal CEM;djinaky@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+46;CEM DOMBONDIR;cem-dombondir;TD2lEVQO;Bignona2;Collège;Principal CEM;dombondir@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+47;CEM EFFOC;cem-effoc;D09Dbgfa;Bignona2;Collège;Principal CEM;effoc@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+48;CEM HILLOL;cem-hillol;ui8rUlLk;Bignona2;Collège;Principal CEM;hillol@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+49;CEM KABILINE 1;cem-kabiline-1;hSbS1drJ;Bignona2;Collège;Principal CEM;kabiline1@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+50;CEM KABILINE 2;cem-kabiline-2;eAb8gBD5;Bignona2;Collège;Principal CEM;kabiline2@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+51;CEM KAFOUNTINE;cem-kafountine;H41fRwmh;Bignona2;Collège;Principal CEM;kafountine@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+52;CEM KAGNOBON;cem-kagnobon;JuPOixfw;Bignona2;Collège;Principal CEM;kagnobon@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+53;CEM KARTIACK;cem-kartiack;cwONKPWp;Bignona2;Collège;Principal CEM;kartiack@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+54;CEM KATABA 1;cem-kataba-1;LgyU0Tnu;Bignona2;Collège;Principal CEM;kataba1@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+55;CEM KOUDIOUBE;cem-koudioube;WrMl3c1y;Bignona2;Collège;Principal CEM;koudioube@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+56;CEM MANDEGANE;cem-mandegane;o2Et0lXT;Bignona2;Collège;Principal CEM;mandegane@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+57;CEM MANGAGOULACK;cem-mangagoulack;tHTsV3im;Bignona2;Collège;Principal CEM;mangagoulack@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+58;CEM MLOMP BIGNONA;cem-mlomp-bignona;EQ89Ql8S;Bignona2;Collège;Principal CEM;mlomp.bignona@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+59;CEM NIOMOUNE;cem-niomoune;J4SG9dU7;Bignona2;Collège;Principal CEM;niomoune@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+60;CEM SANTHIABA;cem-santhiaba;QNBndt0f;Bignona2;Collège;Principal CEM;santhiaba@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+61;CEM SELETY;cem-selety;NbvrYv9W;Bignona2;Collège;Principal CEM;selety@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+62;CEM TENDOUCK;cem-tendouck;ngD1HjhF;Bignona2;Collège;Principal CEM;tendouck@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+63;CEM THIOBON;cem-thiobon;iu8jOOPv;Bignona2;Collège;Principal CEM;thiobon@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+64;CEM THIONCK ESSYL;cem-thionck-essyl;5kPHgqhk;Bignona2;Collège;Principal CEM;thionck.essyl@caosp.zig;33 991 11 59;Bignona;2024-01-19 19:46:55;2
+65;CEM ALINE SITOE DIATTA;cem-aline-sitoe-diatta;3eu2p0AE;Oussouye;Collège;Principal CEM;aline.sitoe.diatta@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+66;CEM BOUCOTTE DIEMBERING;cem-boucotte-diembering;kunDzIP2;Oussouye;Collège;Principal CEM;boucotte.diembering@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+67;CEM BOUKITINGHO;cem-boukitingho;pa400SkE;Oussouye;Collège;Principal CEM;boukitingho@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+68;CEM CABROUSSE;cem-cabrousse;pjYla3uc;Oussouye;Collège;Principal CEM;cabrousse@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+69;CEM CAGNOUT;cem-cagnout;l1HRZimJ;Oussouye;Collège;Principal CEM;cagnout@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+70;CEM CAP SKIRRING;cem-cap-skirring;XlAWkhch;Oussouye;Collège;Principal CEM;cap.skirring@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+71;CEM CARABANE;cem-carabane;yYmXuFeC;Oussouye;Collège;Principal CEM;carabane@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+72;CEM DIEMBERING;cem-diembering;NJAEomfO;Oussouye;Collège;Principal CEM;diembering@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+73;CEM ELINKINE;cem-elinkine;L9CAIDRS;Oussouye;Collège;Principal CEM;elinkine@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+74;CEM LOUDIA OUOLOF;cem-loudia-ouolof;cjkzW7nc;Oussouye;Collège;Principal CEM;loudia.ouolof@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+75;CEM MLOMP OUSSOUYE;cem-mlomp-oussouye;hisR6OZi;Oussouye;Collège;Principal CEM;mlomp.oussouye@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+76;CEM OUKOUT;cem-oukout;QGIemG7J;Oussouye;Collège;Principal CEM;oukout@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+77;CEM OUSSOUYE 2;cem-oussouye-2;CjYlSTza;Oussouye;Collège;Principal CEM;oussouye2@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+78;CEM SIGANAR;cem-siganar;vjh89TIo;Oussouye;Collège;Principal CEM;siganar@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+79;CEM YOUTOU;cem-youtou;lkwne5wC;Oussouye;Collège;Principal CEM;youtou@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;3
+80;CEM ADEANE;cem-adeane;TeA5mftG;Ziguinchor;Collège;Principal CEM;adeane@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+81;CEM AGNACK;cem-agnack;g2ZeBt5m;Ziguinchor;Collège;Principal CEM;agnack@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+82;CEM BAGHAGHA;cem-baghagha;kyaYHXkB;Ziguinchor;Collège;Principal CEM;baghagha@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+83;CEM BOUCOTTE EST;cem-boucotte-est;GoybmZ1m;Ziguinchor;Collège;Principal CEM;boucotte.est@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+84;CEM BOUCOTTE SUD;cem-boucotte-sud;gPaNmRCp;Ziguinchor;Collège;Principal CEM;boucotte.sud@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+85;CEM BOUROFAYE;cem-bourofaye;Ah49wo3K;Ziguinchor;Collège;Principal CEM;bourofaye@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+86;CEM BOUTOUPA;cem-boutoupa;NGJH2TkZ;Ziguinchor;Collège;Principal CEM;boutoupa@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+87;CEM BOUTOUTE;cem-boutoute;PmW9VQ8b;Ziguinchor;Collège;Principal CEM;boutoute@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+88;CEM DIAGNON;cem-diagnon;f4vPciGi;Ziguinchor;Collège;Principal CEM;diagnon@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+89;CEM DIALANG;cem-dialang;zdePlBwe;Ziguinchor;Collège;Principal CEM;dialang@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+90;CEM DJIBONKER;cem-djibonker;IzIqksA2;Ziguinchor;Collège;Principal CEM;djibonker@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+91;CEM ENAMPORE;cem-enampore;aogizblb;Ziguinchor;Collège;Principal CEM;enampore@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+92;CEM GOUMEL;cem-goumel;HPHpgnH5;Ziguinchor;Collège;Principal CEM;goumel@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+93;CEM KAGNAROU;cem-kagnarou;jGrdbkz1;Ziguinchor;Collège;Principal CEM;kagnarou@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+94;CEM KAGUITTE;cem-kaguitte;vxHGxSl6;Ziguinchor;Collège;Principal CEM;kaguitte@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+95;CEM KANDE;cem-kande;Xn1ef3Hf;Ziguinchor;Collège;Principal CEM;kande@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+96;CEM KANDE ALASSANE;cem-kande-alassane;VgP8HrQb;Ziguinchor;Collège;Principal CEM;kande.alassane@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+97;CEM KANDIALANG;cem-kandialang;INBD0mE2;Ziguinchor;Collège;Principal CEM;kandialang@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+98;CEM KENIA;cem-kenia;BHGWvHmI;Ziguinchor;Collège;Principal CEM;kenia@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+99;CEM LYNDIANE 1;cem-lyndiane-1;BSCIIGPG;Ziguinchor;Collège;Principal CEM;lyndiane1@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+100;CEM LYNDIANE 2;cem-lyndiane-2;n7S2yj8Y;Ziguinchor;Collège;Principal CEM;lyndiane2@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+101;CEM MALICK FALL;cem-malick-fall;LFvCk9ZA;Ziguinchor;Collège;Principal CEM;malick.fall@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+102;CEM MANGOULE;cem-mangoule;VdxgmsZO;Ziguinchor;Collège;Principal CEM;mangoule@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+103;CEM MEDJIEDJIE;cem-medjiedjie;IC7O4Bv5;Ziguinchor;Collège;Principal CEM;medjiedjie@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+104;CEM MPACK;cem-mpack;Ga17TXcW;Ziguinchor;Collège;Principal CEM;mpack@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+105;CEM NEMA II;cem-nema-ii;e2gNIP6N;Ziguinchor;Collège;Principal CEM;nema.ii@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+106;CEM NIAGUIS;cem-niaguis;q1HrG4nS;Ziguinchor;Collège;Principal CEM;niaguis@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+107;CEM NYASSIA;cem-nyassia;rK2JQWNb;Ziguinchor;Collège;Principal CEM;nyassia@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+108;CEM SOUCOUPAPAYE;cem-soucoupapaye;EVMwapqv;Ziguinchor;Collège;Principal CEM;soucoupapaye@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+109;CEM TETE DIADHIOU;cem-tete-diadhiou;UPCS2f2d;Ziguinchor;Collège;Principal CEM;tete.diadhiou@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+110;CEMT AMILCAR CABRAL;cemt-amilcar-cabral;YlHvA1YN;Ziguinchor;Collège;Principal CEM;amilcar.cabral@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;4
+112;LYCEE AHOUNE SANE;lycee-ahoune-sane;rnCt4H3h;Bignona1;Lycèe;Proviseur LYCEE;lycee.ahoune.sane@caosp.zig;33 991 11 59;Bignona1;2024-01-19 19:46:55;5
+114;LYCEE BAILA;lycee-baila;WxPWdsmz;Bignona1;Lycèe;Proviseur LYCEE;lycee.baila@caosp.zig;33 991 11 59;Bignona1;2024-01-19 19:46:55;5
+117;LYCEE COUBANAO;lycee-coubanao;Gscn1Lp8;Bignona1;Lycèe;Proviseur LYCEE;lycee.coubanao@caosp.zig;33 991 11 59;Bignona1;2024-01-19 19:46:55;5
+129;LYCEE OULAMPANE;lycee-oulampane;zgSf0iBP;Bignona1;Lycèe;Proviseur LYCEE;lycee.oulampane@caosp.zig;33 991 11 59;Bignona1;2024-01-19 19:46:55;5
+131;LYCEE SINDIAN;lycee-sindian;OXVmdzf9;Bignona1;Lycèe;Proviseur LYCEE;lycee.sindian@caosp.zig;33 991 11 59;Bignona1;2024-01-19 19:46:55;5
+133;LYCEE TENGHORY ARRONDISSEMENT;lycee-tenghory-arrondissement;scLGzPgX;Bignona1;Lycèe;Proviseur LYCEE;lycee.tenghory.arrondissement@caosp.zig;33 991 11 59;Bignona1;2024-01-19 19:46:55;5
+115;LYCEE BALINGORE;lycee-balingore;kzMnphpL;Bignona2;Lycèe;Proviseur LYCEE;lycee.balingore@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+118;LYCEE DAOUDA LAN CAMARA SANE;lycee-daouda-lan-camara-sane;1Y3tde9b;Bignona2;Lycèe;Proviseur LYCEE;lycee.daouda.lan.camara.sane@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+119;LYCEE DIOULOULOU;lycee-diouloulou;R2uzhfzg;Bignona2;Lycèe;Proviseur LYCEE;lycee.diouloulou@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+120;LYCEE DJIBIDIONE;lycee-djibidione;VvnbuTNZ;Bignona2;Lycèe;Proviseur LYCEE;lycee.djibidione@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+122;LYCEE DJINAKY;lycee-djinaky;ApE3D4NZ;Bignona2;Lycèe;Proviseur LYCEE;lycee.djinaky@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+125;LYCEE KAFOUNTINE;lycee-kafountine;rVtLZeHd;Bignona2;Lycèe;Proviseur LYCEE;lycee.kafountine@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+126;LYCEE KARTIACK;lycee-kartiack;LdLQH2jI;Bignona2;Lycèe;Proviseur LYCEE;lycee.kartiack@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+132;LYCEE TENDOUCK;lycee-tendouck;HT6ruE8C;Bignona2;Lycèe;Proviseur LYCEE;lycee.tendouck@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+134;LYCEE THIONCK ESSYL;lycee-thionck-essyl;u1uGqbPx;Bignona2;Lycèe;Proviseur LYCEE;lycee.thionck.essyl@caosp.zig;33 991 11 59;Bignona2;2024-01-19 19:46:55;5
+113;LYCEE ALINE SITOE DIATTA;lycee-aline-sitoe-diatta;Iane0tge;Oussouye;Lycèe;Proviseur LYCEE;lycee.aline.sitoe.diatta@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;5
+116;LYCEE CABROUSSE;lycee-cabrousse;8XN86DRR;Oussouye;Lycèe;Proviseur LYCEE;lycee.cabrousse@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;5
+127;LYCEE MLOMP OUSSOUYE;lycee-mlomp-oussouye;N3Ia8rh2;Oussouye;Lycèe;Proviseur LYCEE;lycee.mlomp.oussouye@caosp.zig;33 991 11 59;Oussouye;2024-01-19 19:46:55;5
+111;LYCEE ADEANE;lycee-adeane;kLwgvqIk;Ziguinchor;Lycèe;Proviseur LYCEE;lycee.adeane@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;5
+121;LYCEE DJIGNABO;lycee-djignabo;3v64ZaI6;Ziguinchor;Lycèe;Proviseur LYCEE;lycee.djignabo@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;5
+123;LYCEE ELHADJ OMAR LAMINE BADJI;lycee-elhadj-omar-lamine-badji;NhSnZv2a;Ziguinchor;Lycèe;Proviseur LYCEE;lycee.elhadj.omar.lamine.badji@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;5
+124;LYCEE INDETERMINE;lycee-indetermine;YWsqKz3Y;Ziguinchor;Lycèe;Proviseur LYCEE;lycee.indetermine@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;5
+128;LYCEE NIAGUIS;lycee-niaguis;6GTuTObj;Ziguinchor;Lycèe;Proviseur LYCEE;lycee.niaguis@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;5
+130;LYCEE PEYRISSAC;lycee-peyrissac;WxezzPxZ;Ziguinchor;Lycèe;Proviseur LYCEE;lycee.peyrissac@caosp.zig;33 991 11 59;Ziguinchor;2024-01-19 19:46:55;5

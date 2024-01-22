@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "import_export",
     "crispy_forms",
     "crispy_bootstrap5",
+    "formtools",
     
     "account",
     "core",
@@ -169,25 +170,26 @@ WSGI_APPLICATION = "caosp.wsgi.application"
 #     }
 # }
 
-# DATABASES = {
-
-#     'default': dj_database_url.parse(config('DATABASE_URL'))
-
-# }
-
 DATABASES = {
 
-    'default': {
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'caospkisarr',
-        'USER': 'kisarr',
-        'PASSWORD': 'kisarr',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
 }
 
+# DATABASES = {
+
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'caospkisarr',
+#         'USER': 'kisarr',
+#         'PASSWORD': 'kisarr',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
+# PGPASSWORD=8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5 psql -h dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com -U caosp quoteparts
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

@@ -56,9 +56,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    
     "django_htmx",
     "template_partials",    
     "import_export",
+    "crispy_forms",
+    "crispy_bootstrap5",
     
     "account",
     "core",
@@ -107,6 +110,9 @@ CORS_ALLOW_HEADERS = (
     "x-csrftoken",
     "x-requested-with",
 )
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # TEMPLATES = [
 #     {

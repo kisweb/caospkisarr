@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from etablissement.models import Etablissement, get_montant_general
+from etablissement.models import Etablissement, get_montant_general, nombre_etablissement_ief
 from account.models import User
 import json
 from login_required import login_not_required
@@ -26,7 +26,7 @@ def index(request):
     context = {
         'etablissements': mesetablissements,
         'users': mesusers,
-        'montant_total': get_montant_general()
+        'get_montant_general': get_montant_general(2)
     }
     return render(request, 'core/index.html', context=context)
 

@@ -1,5 +1,5 @@
 {% extends 'layouts/base-caosp.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %} Ajouter un collège {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
@@ -27,27 +27,34 @@
 			<div class="card">
                 <div class="card-body">
                     <div class="m-sm-4">
+
+                        <form action="">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+
+                            <button type="submit" class="btn btn-info">Enregistrer les données</button>
+                        </form>
                         
                         <form method="POST" action=".">
                             {% csrf_token %} 
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="inputFirstName">Etablissement</label>
+                                    <label class="form-label">Etablissement</label>
                                     <input type="text" class="form-control" name="name">
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="inputLastName">Email de l'Etablissement</label>
+                                    <label class="form-label">Email de l'Etablissement</label>
                                     <input type="text" class="form-control" name="email" >
                                 </div>
                                 
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label" for="inputFirstName">Téléphone</label>
+                                    <label class="form-label">Téléphone</label>
                                     <input type="text" class="form-control" name="phone" >
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label" for="inputLastName">Type d'établissement</label>
+                                    <label class="form-label">Type d'établissement</label>
                                     <select class="select-control form-control-lg w-100" name="type_etablissement">
                                         <option value="">Choisir du type de l'Etablissement</option>
                                         <option {% if etablissement.type_etablissement == 'college' %} selected {% endif %} value="college">Collège</option>
@@ -57,7 +64,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label" for="inputLastName">IEF</label>
+                                    <label class="form-label">IEF</label>
                                     <select class="select-control form-control-lg w-100" name="ief">
                                         <option value="">Choix IEF</option>
                                         <option  value="Bignona1">Bignona 1</option>
@@ -69,13 +76,13 @@
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="address">Adresse du Collège</label>
+                                    <label class="form-label">Adresse du Collège</label>
                                     <input type="text" class="form-control" name="address">
                                 </div>
                             
                             
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="ce">Prénom et Nom du CE</label>
+                                    <label class="form-label">Prénom et Nom du CE</label>
                                     <input type="text" class="form-control" name="nomce">
                                 </div>
                                 
@@ -95,4 +102,12 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $('#id_ief').select2({ theme: 'bootstrap-5'});
+</script>
+{% endblock javascripts %}

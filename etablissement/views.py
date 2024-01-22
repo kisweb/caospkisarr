@@ -13,7 +13,7 @@ from .models import Etablissement, Quote
 from account.models import User
 from caosp.settings import ANNEES
 from helpers.util import *
-from etablissement.forms import FilterQuoteAnneeForm, FilterIefForm,FilterTypeEtablissementForm
+from etablissement.forms import FilterQuoteAnneeForm, FilterIefForm,FilterTypeEtablissementForm, EtablissementCreateForm
 
 from caosp.utils import unique_slug_generator
 
@@ -129,7 +129,7 @@ def add(request):
                 phone=phone, 
                 save_by=request.user
             )
-    context = {'segment': 'etablissement-add'}
+    context = {'segment': 'etablissement-add', 'form': EtablissementCreateForm}
 
     return render(request, 'etablissement/add.html', context=context)
 

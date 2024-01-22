@@ -12,6 +12,19 @@ from helpers.util import h_random_ascii
 from caosp.utils import slugify
 
 
+class Ief(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug: str = AutoSlugField(populate_from="name")
+    description = models.CharField(max_length=255, blank=True, null=True)
+    
+    class Meta:
+        verbose_name = "ief"
+        verbose_name_plural = "iefs"
+
+    def __str__(self):
+        return self.slug
+    
+
 class Etablissement(models.Model):
     """
     Name: Etablissement model definition
@@ -32,7 +45,7 @@ class Etablissement(models.Model):
     name = models.CharField(max_length=132)
     slug: str = AutoSlugField(populate_from="name")
     code = models.CharField(max_length=16)
-    ief = models.CharField(max_length=25, choices=IEF.choices)
+    ief = models.ForeignKey(Ief, on_delete=models.SET_NULL, null=True)
     type_etablissement = models.CharField(
         max_length=20, choices=TypeEtablissement.choices, null=True
     )
@@ -49,6 +62,11 @@ class Etablissement(models.Model):
 
     def __str__(self):
         return self.slug
+    
+    def nbEtabsIef(self, ief:str):
+        etabs = self.objects.filter(ief=ief).all()
+        return etabs.count()
+
 
 
 class Quote(models.Model):
@@ -112,13 +130,14 @@ class Quote(models.Model):
         return montant
 
 
-def get_montant_general(annee:str=None, ief:str=None, **kwargs):
-    quotes = Quote.objects.filter(etablissement__ief=ief, annee_scolaire__annee=annee)
+def get_montant_general(annee: int|None=None, **kwargs):
+    quotes = Quote.objects.filter(annee_scolaire_id=annee).all()
     montant_general = sum(quote.versement for quote in quotes)
     return montant_general
 
-def nombre_etablissement_ief(annee:str=None, ief:str=None):
-    etablissements = Etablissement.objects.filter(ief=ief, annee=AnneeScolaire.get_annee_en_cours()),
+def nombre_etablissement_ief(ief:str=None):
+    etablissements = Etablissement.objects.filter(ief=ief, active=True).all()
+    return etablissements.count()
 
 def createQuote(sender, instance, created, **kwargs):
     if created:

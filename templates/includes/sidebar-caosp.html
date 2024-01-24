@@ -27,8 +27,6 @@
         </div>
         <ul class="sidebar-item">
             <ul id="cem" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                <li class="sidebar-item {% if 'etablissement-list' in segment %} active {% endif %}"><a class="sidebar-link" href="{% url 'etablissement:lycees' %}">Lycées</a></li>
-                <li class="sidebar-item {% if 'etablissement-list' in segment %} active {% endif %}"><a class="sidebar-link" href="{% url 'etablissement:colleges' %}">Collèges</a></li>
                 <li class="sidebar-item {% if 'etablissement-list' in segment %} active {% endif %}"><a class="sidebar-link" href="{% url 'etablissement:index' %}">Liste</a></li>
                 {%if request.user.is_staff %}
                 <li class="sidebar-item  {% if 'etablissement-add' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'etablissement:add' %}">Ajouter</a></li>
@@ -36,7 +34,7 @@
                 
                 <li class="sidebar-item  {% if 'quote-list' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'quote:index' %}">Quoteparts</a></li>
                 {% if request.user.is_authenticated %}
-                    <li class="sidebar-item  {% if 'mon-etablissement' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'etablissement:monetablissement'  %}">Mon Etablissement</a></li>
+                    <li class="sidebar-item  {% if 'mon-etablissement' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="#">Mon Etablissement</a></li>
                 {% endif%}
             </ul>
         </ul>

@@ -24,7 +24,7 @@ class Ief(models.Model):
     def __str__(self):
         return self.slug
     
-
+    
 class Etablissement(models.Model):
     """
     Name: Etablissement model definition
@@ -37,17 +37,17 @@ class Etablissement(models.Model):
         ZIGUINCHOR = "Ziguinchor", "Ziguinchor"
 
     class TypeEtablissement(models.TextChoices):
-        COLLEGE = "Collège", "College"
-        LYCEE = "Lycée", "Lycee"
-        MIXTE = "Lycée Mixte", "Lycée Mixte"
-        AUTRE = "Autre", "Autre"
+        COLLEGE = "college", "College"
+        LYCEE = "lycee", "Lycee"
+        MIXTE = "mixte", "Lycée Mixte"
+        AUTRE = "autre", "Autre"
 
     name = models.CharField(max_length=132)
     slug: str = AutoSlugField(populate_from="name")
     code = models.CharField(max_length=16)
     ief = models.ForeignKey(Ief, on_delete=models.SET_NULL, null=True)
     type_etablissement = models.CharField(
-        max_length=20, choices=TypeEtablissement.choices, null=True
+        max_length=20, choices=TypeEtablissement.choices, null=True, default='autre'
     )
     nomce = models.CharField(max_length=132, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
@@ -62,12 +62,10 @@ class Etablissement(models.Model):
 
     def __str__(self):
         return self.slug
-    
-    def nbEtabsIef(self, ief:str):
-        etabs = self.objects.filter(ief=ief).all()
+
+    def nbEtabsIef(self, id:int=None, **kwargs):
+        etabs = self.objects.filter(ief_id=id).all()
         return etabs.count()
-
-
 
 class Quote(models.Model):
     class QuoteAnneeScolaires(models.TextChoices):
@@ -82,15 +80,15 @@ class Quote(models.Model):
 
 
     etablissement = models.ForeignKey(
-        Etablissement, on_delete=models.CASCADE
+        Etablissement, on_delete=models.CASCADE, null=True
     )
     annee_scolaire = models.ForeignKey(
-        AnneeScolaire, on_delete=models.CASCADE, null=True
+        AnneeScolaire, on_delete=models.SET_NULL, null=True
     )
+    save_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     slug = models.SlugField(max_length=130)
     effectif = models.IntegerField(null=False, blank=False, default=0)
     versement = models.IntegerField(null=False, blank=False, default=0)
-    save_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     quote_date_time = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(null=True, blank=True, auto_now=True)
     paid = models.BooleanField(default=False)
@@ -138,15 +136,3 @@ def get_montant_general(annee: int|None=None, **kwargs):
 def nombre_etablissement_ief(ief:str=None):
     etablissements = Etablissement.objects.filter(ief=ief, active=True).all()
     return etablissements.count()
-
-def createQuote(sender, instance, created, **kwargs):
-    if created:
-        etablissement = instance
-        quotepart = Quote.objects.create(
-            etablissement=etablissement,
-            annee_scolaire=AnneeScolaire.objects.get(statut="anneeEnCours"),
-            save_by=instance.save_by,
-        )
-
-
-post_save.connect(createQuote, sender=Etablissement)

@@ -1,17 +1,31 @@
 from django import forms
+from anneescolaire.models import AnneeScolaire
 
 from etablissement.models import Ief, Quote, Etablissement
 
-class FilterQuoteAnneeForm(forms.Form):
-    quote_annee = forms.ChoiceField(
-        # widget=forms.CheckboxSelectMultiple,
-        choices=Quote.QuoteAnneeScolaires.choices
+class FilterQuoteAnneeForm(forms.ModelForm):
+    quote_annee = forms.ModelChoiceField(
+        queryset=AnneeScolaire.objects.all(),
     )
-class FilterIefForm(forms.Form):
-    pass
+    class Meta:
+        model = AnneeScolaire
+        fields = ('id', 'annee')
+    
+    
+    
+class FilterIefForm(forms.ModelForm):
+    iefs = forms.ModelChoiceField(
+        queryset=Ief.objects.all(),
+    )
+    class Meta:
+        model = Ief
+        fields = ('id', 'name')
+    
+
+
 class FilterTypeEtablissementForm(forms.Form):
     type_etablissement = forms.ChoiceField(
-        #widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple,
         choices=Etablissement.TypeEtablissement.choices
     )
     

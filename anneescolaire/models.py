@@ -1,9 +1,18 @@
-import uuid
+import re
 from django.db import models
-
-# Create your models here.
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import uuid
+from django_extensions.db.fields import AutoSlugField
+from django.db.models import F
+from helpers.util import h_random_ascii, slugify
 
 import datetime
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.urls import reverse
+
 from django.db import models
 
 class AnneeScolaire(models.Model):
@@ -32,6 +41,3 @@ class AnneeScolaire(models.Model):
         annee = self.objects.get(statut='anneeEnCours')
         return annee
     
-    
-        
-

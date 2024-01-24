@@ -1,98 +1,160 @@
-{% extends 'layouts/base-caosp.html' %}
-
-{% block title %}Quote-parts{% endblock %} 
+{% extends 'layouts/base-caosp.html' %} {% block title %}Quote-parts{%endblock%}
+{% load crispy_forms_tags %} {% load static %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
 
-{% load static %}
 
-{% block content %}
 <style>
-    @media print {
-    .no-print { display: none!important }
- }
- @media not print {
-    .print { display: none!important }
- }
-</style>
+   @media print {
+     .no-print {
+       display: none !important;
+     }
+   }
+   @media not print {
+     .print {
+       display: block !important;
+       width: auto;
+     }
+   }
+ </style>
+
+{% endblock stylesheets %} {% block content %}
+
 <main class="content">
-   <div class="container-fluid p-0">
-
-       <div class="no-print row mb-2 mb-xl-3">
-           <div class="col-auto d-none d-sm-block">
-               <h3>
-                   <strong>Les Quote-parts</strong>
-                   {% if request.user.is_staff %}
-                   <span>
-                       <a class="" href="{% url 'etablissement:add' %}">Ajouter</a>
-                   </span>
-                   {% endif %}
-                   <form class="d-lg-inline-block" method="GET">
-                      <div class="input-group input-group-navbar">
-                         <span class="form-control form-check-inline" >
-                            {{form.quote_annee}}
-                         </span>
-                         <button class="btn text-sm" type="submit">
-                                 <i class="align-left" data-feather="search"></i>
-                        </button>
-                      </div>
-                   </form>
-               </h3>
-           </div>       
-         </div>       
-       
-       <div class="card">
-            <div class="card-header">
-               <button onclick="window.print()" class="no-print btn btn-primary float-right">
-                  Imprimer
-               </button>
-               <h2 class="h2">
-                  <strong>Les Quote-parts</strong>
-               </h2>
+  <div class="container-fluid p-0">
+    <div class="row gutters">
+      <div class="no-print col-md-2 col-sm-12">
+        <h3>
+          <strong>Les Quote-parts</strong>
+        </h3>
+        <form action="" method="get">
+          <div class="row">
+            <div class="col">
+              <label for="">{{ filter_form.label }}</label>
+              <span class="form-control-color"> {{ filter.form|crispy }} </span>
             </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="">Nbre de lignes</label>
+              <select class="form-control" name="per_page">
+                <option class="form-control" value="10">10</option>
+                <option class="form-control" value="15">15</option>
+                <option class="form-control" value="20">20</option>
+                <option class="form-control" value="25">25</option>
+              </select>
+            </div>
+          </div>
+          <button class="list-group-item p-1 active mx-auto mt-2" type="submit">
+            Afficher
+          </button>
+          <div class="text-center mt-4">
+            <a class="btn btn-md btn-info" href="{{ request.path }}">
+              Réinitialiser
+            </a>
+          </div>
+        </form>
+        <div class="mt-5">
+          <a href="{% url 'quote:view-quotes' %}" class="btn btn-info">
+            <i class="icon-download"></i> impression
+          </a>
+          <button
+            type="button"
+            onClick="window.print()"
+            class="btn btn-secondary"
+          >
+            <i class="icon-printer"></i> Print
+          </button>
+        </div>
+      </div>
+      <div class="col-md-10 gutters">
+        <div class="card">
+          <div class="card-header">
+            <!-- Row start -->
+            <div class="row gutters">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <h4 class="text-center">République du Sénégal</h4>
+                <h6 class="text-center">Un Peuple - Un But - Une foi</h6>
+              </div>
+            </div>
+            <!-- Row end -->
 
-               <div class="m-sm-4">
-                   <table class="table table-sm">
-                       <thead>
-                           <tr>
-                               <th>Année</th>
-                               <th>Etablissement</th>
-                               <th>Effectif</th>
-                               <th>Attendu</th>
-                               <th>Versé</th>
-                               <th>Statut</th>
-                               <th class="text-right">Actions</th>
-                           </tr>
-                       </thead>
-                       <tbody>
-                        {% for quote in quotes%}
-                        <tr>
-                           <td>{{ quote.annee_scolaire }}</td>
-                           <td>{{quote.etablissement}}</td>
-                           <td>{{quote.effectif}}</td>
-                           <td>{{quote.get_montant}}</td>
-                           <td>{{quote.versement}}</td>
-                           <td>
-                              {% if quote.is_ok == True %}
-                              <span class="text-white bg-success px-2 rounded-radius-25">A jour</span>
-                              {% else %}
-                              <span class="text-white bg-danger px-3 rounded-radius-25"> <i class="mdi mdi-arrow-bottom-right"></i> Oh ! </span>
-                              {% endif %}
-                           </td>                           
-                           <td class="text-right">
-                              A compléter
-                           </td>
-                        </tr>
-                        {% endfor%}
-                       </tbody>
-                        
-                   </table>
+            <!-- Row start -->
+            <div class="row gutters">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <h5 class="invoice-logo">Ministère de l'Education nationale</h5>
+                <h5 class="invoice-logo">
+                  Inspection d'Académie de Ziguinchor
+                </h5>
+                <h4 class="invoice-logo">
+                  <strong> C.A.O.S.P. de Ziguinchor </strong>
+                </h4>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <address class="text-right">
+                  Donald Programmer Inc, 45 NorthWest<br />
+                  Cameroon, Douala<br />
+                  00000 00000
+                </address>
+              </div>
+            </div>
+            <!-- Row end -->
+          </div>
 
-               </div>
-           </div>
-       
-   </div>
+          <div class="m-sm-4">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Année</th>
+                  <th>Etablissement</th>
+                  <th>Effectif</th>
+                  <th>Attendu</th>
+                  <th>Versé</th>
+                  <th>Statut</th>
+                  <th class="text-right"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for quote in quotes%}
+                <tr>
+                  <td>{{ quote.annee_scolaire }}</td>
+                  <td>
+                    {{quote.etablissement.name}}
+                    ({{quote.etablissement.type_etablissement}})
+                  </td>
+                  <td>{{quote.effectif}}</td>
+                  <td>{{quote.get_montant}}</td>
+                  <td>{{quote.versement}}</td>
+                  <td
+                    class="{% if quote.get_montant != quote.versement %} text-right bg-secondary text-white {% endif %}"
+                  >
+                    {% if quote.is_ok == True %}
+                    <span class="text-white bg-success px-2 rounded-radius-25"
+                      >A jour</span
+                    >
+                    {% else %}
+                    <span class="text-white bg-danger px-3 rounded-radius-25">
+                      <i class="mdi mdi-arrow-bottom-right"></i> Oh !
+                    </span>
+                    {% endif %}
+                  </td>
+                  <td class="text-right"></td>
+                </tr>
+                {% endfor%}
+                <tr>
+                  <td class="h4 text-right" colspan="4">Montant total</td>
+                  <td class="h3 text-left" colspan="2">
+                    {{ montantTotal}} FCFA
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 {% endblock %}

@@ -33,16 +33,16 @@ def pagination(request, quotes):
 
 
 
-def get_quote(pk):
+def get_quote(annee:int |None = None):
     """ get quote fonction """
 
-    obj = Quote.objects.get(pk=pk)
+    obj = Quote.objects.get(annee_scolaire=annee)
 
-    articles = obj.etablissement.all()
+    etablissements = obj.etablissement_set.all()
 
     context = {
         'obj': obj,
-        'articles': articles
+        'etablissements': etablissements
     }
 
     return context

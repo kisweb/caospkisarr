@@ -1,12 +1,11 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 
 from .models import Etablissement, Quote
 
 
-class AdminEtablissement(ImportExportModelAdmin):
+class AdminEtablissement(admin.ModelAdmin):
     list_display = (
         'slug',
         'code',

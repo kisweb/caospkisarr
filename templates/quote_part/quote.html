@@ -1,174 +1,179 @@
-{% extends "base-caosp.html" %}
+{% extends "layouts/base-caosp.html" %} {% load static %}
 
-{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
 
-{% block content %}
+<style>
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+  @media not print {
+    .print {
+      display: block !important;
+      width: auto;
+    }
+  }
+</style>
+
+{% endblock stylesheets %} {% block content %}
 
 <div class="container">
-    <div class="row gutters">
-    	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    		<div class="card">
-    			<div class="card-body p-0">
-    				<div class="invoice-container">
-    					<div class="invoice-header">
-    
-    						<!-- Row start -->
-    						<div class="row gutters">
-    							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-    								<div class="custom-actions-btns mb-5">
-    									<a href="{% url 'invoice-pdf' pk=obj.pk %}" class="btn btn-primary">
-    										<i class="icon-download"></i> Download
-    									</a>
-    									<button type="button" onClick="window.print()" class="btn btn-secondary">
-    										<i class="icon-printer"></i> Print
-    									</button>
-    								</div>
-    							</div>
-    						</div>
-    						<!-- Row end -->
-    
-    						<!-- Row start -->
-    						<div class="row gutters">
-    							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-    								<a href="donaldprogrammeur.com" class="invoice-logo">
-    									Donald Programmer
-    								</a>
-    							</div>
-    							<div class="col-lg-6 col-md-6 col-sm-6">
-    								<address class="text-right">
-    									Donald Programmer Inc, 45 NorthWest<br>
-    									Cameroon, Douala<br>
-    									00000 00000
-    								</address>
-    							</div>
-    						</div>
-    						<!-- Row end -->
-    
-    						<!-- Row start -->
-    						<div class="row gutters">
-    							<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-    								<div class="invoice-details">
-    									<address>
-    										{{obj.customer.name}}<br>
-    										{{obj.customer.address}}, {{obj.customer.city}}, Cameroon
-    									</address>
-    								</div>
-    							</div>
-    							<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-    								<div class="invoice-details">
-    									<div class="invoice-num">
-    										<div>{{obj.get_invoice_type_display}} - #00{{obj.id}}</div>
-    										<div>{{obj.invoice_date_time}}</div>
-    									</div>
-    								</div>													
-    							</div>
-    						</div>
-    						<!-- Row end -->
-    
-    					</div>
-    
-    					<div class="invoice-body">
-    
-    						<!-- Row start -->
-    						<div class="row gutters">
-    							<div class="col-lg-12 col-md-12 col-sm-12">
-    								<div class="table-responsive">
-    									<table class="table custom-table m-0">
-    										<thead>
-    											<tr>
-    												<th>Items</th>
-													<th>Product ID</th>
-													<th>Quantities</th>
-													<th>Unit Price</th>
-													<th>Subtotal</th>
-    											</tr>
-    										</thead>
-    										<tbody>
-                                              {% for article in articles %}  
-                                              
-    											<tr>
-
-                                                   
-
-                                                    <td>
-    													{{ article.name }}
-    													
-    												</td>
-
-													<td>
-    													{{ article.id }}
-    													
-    												</td>
-
-													<td>
-    													{{ article.quantity }}
-    													
-    												</td>
-
-													<td>
-    													{{ article.unit_price }}
-    													
-    												</td>
-
-													<td>
-    													{{ article.get_total }}
-    													
-    												</td>
-
-                                                    
-    												
-    											</tr>
-                                               {% endfor %} 
-    											
-    											
-    											<tr>
-    												<td>Comment: {{obj.comments}}</td>
-    												<td colspan="2">
-														<p>
-															Subtotal<br>
-															Shipment &amp; Handling<br>
-															Tax<br>
-														</p>
-    													<h5 class="text-success"><strong>Total</strong></h5>
-    												</td>			
-    												<td>
-    													<p>
-    														{{obj.get_total}} FCFA<br>
-    														00.00 FCFA<br>
-    														00.00 FCFA<br>
-    													</p>
-    													<h5 class="text-success"><strong>${{obj.get_total}} FCFA</strong></h5>
-    												</td>
-                                                    <td> 
-                                                            PAID:                    
-
-                                                        {% if obj.paid  %}
-
-                                                           <img class="icon" src="{% static 'images/icon-yes.svg' %}" alt="True">
-                                                        {% else %}
-                                                            <img class="icon" src="{% static 'images/icon-no.svg' %}" alt="False">
-   
-                                                        {% endif %}
-                                                    </td>
-    											</tr>
-    										</tbody>
-    									</table>
-    								</div>
-    							</div>
-    						</div>
-    						<!-- Row end -->
-    
-    					</div>
-    
-    					<div class="invoice-footer">
-    						Thank you for your purchase .
-    					</div>
-    
-    				</div>
-    			</div>
-    		</div>
-    	</div>
+  <!-- Row start -->
+  <div class="no-print row gutters mt-2">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="custom-actions-btns mb-5">
+        <a href="#" class="btn btn-primary">
+          <i class="icon-download"></i> Download
+        </a>
+        <button
+          type="button"
+          onClick="window.print()"
+          class="btn btn-secondary"
+        >
+          <i class="icon-printer"></i> Print
+        </button>
+      </div>
     </div>
+  </div>
+  <!-- Row end -->
+  <div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="invoice-container">
+            <div class="invoice-header mx-2 mt-4">
+              <!-- Row start -->
+              <div class="row gutters mx-2">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                  <h4 class="text-center">République du Sénégal</h4>
+                  <h6 class="text-center">
+					  -=-=-=-=-=-
+				  </h6>
+                  <h6 class="text-center">Un Peuple - Un But - Une Foi</h6>
+                </div>
+              </div>
+              <!-- Row end -->
+
+              <!-- Row start -->
+              <div class="row gutters">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                  <h5 class="invoice-logo">
+                    Ministère de l'Education nationale
+                  </h5>
+                  <h5 class="invoice-logo">
+                    Inspection d'Académie de Ziguinchor
+                  </h5>
+                  <h4 class="invoice-logo">
+                    <strong> C.A.O.S.P. de Ziguinchor </strong>
+                  </h4>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <address class="text-right">
+                    Donald Programmer Inc, 45 NorthWest<br />
+                    Cameroon, Douala<br />
+                    00000 00000
+                  </address>
+                </div>
+              </div>
+              <!-- Row end -->
+
+              <!-- Row start -->
+              <div class="row mt-4">
+                <div class="text-center col-md-12 col-sm-12 col-12">
+                  <h2>
+                    <strong classs="h2"> QUOTEPARTS 2023-2024 </strong>
+                  </h2>
+                  <p classs="h6">Situation arrétée le {{ ladate }}</p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12"></div>
+              </div>
+              <!-- Row end -->
+            </div>
+
+            <div class="invoice-body mx-3 mt-4">
+              <!-- Row start -->
+              <div class="row gutters">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Année</th>
+                        <th>Etablissement</th>
+                        <th>Effectif</th>
+                        <th>Versé</th>
+                        <th>Statut</th>
+                        <th class="text-right"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for quote in quotes%}
+                      <tr>
+                        <td>{{ quote.annee_scolaire }}</td>
+                        <td>
+                          {{quote.etablissement.name}}
+                          ({{quote.etablissement.type_etablissement}})
+                        </td>
+                        <td>{{quote.effectif}}</td>
+                        <td>{{quote.versement}}</td>
+                        <td
+                          class="{% if quote.get_montant != quote.versement %} text-right bg-secondary text-white {% endif %}"
+                        >
+                          {% if quote.is_ok == True %} VALIDE {% else %}
+                          <span
+                            class="text-white bg-danger px-3 rounded-radius-25"
+                          >
+                            <i class="mdi mdi-arrow-bottom-right"></i> REVOIR
+                          </span>
+                          {% endif %}
+                        </td>
+                        <td class="text-right"></td>
+                      </tr>
+                      {% endfor%}
+                      <tr>
+						  <td class="h4 text-right" colspan="6">
+							<hr />
+						</td>
+                      </tr>
+                      <tr>
+                        <td class="h4 text-right" colspan="3">Montant total : </td>
+                        <td class="h3 text-left" colspan="2">
+                          {{ montantTotal}} FCFA
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Row end -->
+            </div>
+
+			<hr />
+            <div class="invoice-footer">
+              <div class="row mx-10">
+                <div class="col-md-1">
+                  
+                </div>
+                <div class="col-md-7">
+                  Ziguinchor le _____/_____/____________/
+                </div>
+                <div class="col-md-4 text-center">
+                  <p classs="h6">
+                    <strong> Le Directeur </strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}

@@ -19,10 +19,9 @@
                                 <div class="card-body">
                                     <h3 class="mt-1 mb-1">{{iefs.count}} IEF</h3>
                                     <ol class="mb-1">
-                                        {%for etab in etablissements %}
-                                            <li>{{etab.ief}} : {{ etab.nbEtabsIef('Bignona 1') }} </li>
+                                        {%for ief in iefs %}
+                                            <li>{{ief.name}} : </li>
                                         {% endfor%}
-                                        {{  }}
                                     </ol>
                                 </div>
                             </div>
@@ -41,7 +40,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title mb-4">Montant Quote-parts</h5>
-                                    <h1 class="mt-1 mb-3">{{get_montant_general}} FCFA</h1>
+                                    <h3 class="mt-1 mb-3">{{get_montant_general}} FCFA</h3>
                                     <div class="mb-1">
                                         <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i>+20%</span>
                                         <span class="text-muted">Année en cours</span>

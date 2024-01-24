@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views import View
 from etablissement.models import Etablissement, Quote, get_montant_general
-from etablissement.forms import FilterQuoteAnneeForm
+from quote.filters import QuoteFilterSet
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.http import HttpResponse
 
@@ -50,7 +51,21 @@ class QuoteView(LoginRequiredSuperuserMixim,View):
     }
 
     def get(self, request, *args, **kwags):
- 
+        filterset = QuoteFilterSet(request.GET, queryset=Quote.objects.all())
+        lesquotes = filterset.qs
+        page_num = request.GET.get('page', 1)
+        per_page = int(request.GET.get('per_page', 3))
+        paginator = Paginator(lesquotes, per_page)
+        
+        try:
+            quotes = paginator.page(page_num)
+        except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+            quotes = paginator.page(1)
+        except EmptyPage:
+            # if the page is out of range, deliver the last page
+            quotes = paginator.page(paginator.num_pages)
+        
         items = pagination(request, self.quotes)
         if request.GET.get('quote_annee') == "ALL" or request.GET.get('quote_annee') is None:
             quote_qs = self.quotes.all()
@@ -58,7 +73,7 @@ class QuoteView(LoginRequiredSuperuserMixim,View):
             quote_annees = request.GET.getlist('quote_annee')
             quote_qs = self.quotes.filter(annee_scolaire__in=quote_annees)
 
-        context = {'segment': 'quote-list', 'quotes': quote_qs.order_by('annee_scolaire', 'etablissement'), 'form': FilterQuoteAnneeForm(), 'annees': ANNEES}
+        context = {'segment': 'quote-list', 'quotes': quotes, 'filter': filterset, 'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))}
 
         return render(request, self.templates_name, context=context)
 
@@ -158,7 +173,7 @@ class AddQuoteView(LoginRequiredSuperuserMixim, View):
 
     template_name = 'quote_part/add_quote.html'
 
-    quotes = Quote.objects.select_related('save_by').all()
+    quotes = Quote.objects.all()
 
     context = {
         'quotes': quotes
@@ -171,20 +186,19 @@ class AddQuoteView(LoginRequiredSuperuserMixim, View):
     def post(self, request, *args, **kwargs):
         
         try: 
-            etablissement = request.POST.get('etablissement')
-            annee = request.POST.get('annee_scolaire')
+            etablissement_id = request.POST.get('etablissement_id')
+            annee_id = request.POST.get('annee_id')
             versement = request.POST.get('versement')
             effectif = request.POST.get('effectif')
-            quote_date_time = request.POST.get('quote_date_time')
             comments = request.POST.get('comments')
+            user_id = request.POST.get('user_id')
              
             quote_object = {
-                'etablissement': etablissement,
-                'annee_scolaire': annee,
+                'etablissement_id': etablissement_id,
+                'annee_scolaire_id': annee_id,
                 'versement': versement,
                 'effectif': effectif,
-                'save_by': request.user,
-                'quote_date_time': quote_date_time,
+                'save_by_id': user_id,
                 'comments': comments
             }
 
@@ -206,22 +220,30 @@ class QuoteVisualizationView(LoginRequiredSuperuserMixim, View):
 
     template_name = 'quote_part/quote.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
 
-        pk = kwargs.get('pk')
+        quotes = get_quote(annee=1)
 
-        context = get_quote(pk)
-
+        context = {'quotes': quotes}
         return render(request, self.template_name, context)
+
+def voir_quotes(request):
+    quotes = Quote.objects.filter(annee_scolaire=1).all()
+    return render(request, 'quote_part/quote.html', {
+        'quotes': quotes,
+        'ladate': datetime.datetime.today(),
+        'segment': 'etablissement-list',
+        'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))
+
+    })
 
 
 @superuser_required
-def get_quote_pdf(request, *args, **kwargs):
+def get_quote_pdf(request):
     """ generate pdf file from html file """
 
-    pk = kwargs.get('pk')
 
-    context = get_quote(pk)
+    context = get_quote(annee=1)
 
     context['date'] = datetime.datetime.today()
 

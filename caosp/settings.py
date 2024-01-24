@@ -32,7 +32,6 @@ CSRF_TRUSTED_ORIGINS = ['https://bold-surf-f3cccb0c.lz1mmz.on-acorn.io']
 
 AUTH_USER_MODEL = 'account.User'
 
-
 try:
     from django.contrib.messages import constants as messages
     MESSAGE_TAGS = {
@@ -170,24 +169,24 @@ WSGI_APPLICATION = "caosp.wsgi.application"
 #     }
 # }
 
-DATABASES = {
-
-    'default': dj_database_url.parse(config('DATABASE_URL'))
-
-}
-
 # DATABASES = {
 
-#     'default': {
+#     'default': dj_database_url.parse(config('DATABASE_URL'))
 
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'caospkisarr',
-#         'USER': 'kisarr',
-#         'PASSWORD': 'kisarr',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
 # }
+
+DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'caospkisarr',
+        'USER': 'kisarr',
+        'PASSWORD': 'kisarr',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # PGPASSWORD=8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5 psql -h dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com -U caosp quoteparts
 

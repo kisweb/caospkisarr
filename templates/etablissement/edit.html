@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-
+ 
             <div class="col-md-9 col-xl-10">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="myetablissement" role="tabpanel">
@@ -59,7 +59,7 @@
                                 <h5 class="card-title mb-0">code : <span class="h4 text-center font-bold">{{etablissement.code}}</span> </h5>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action=".">
+                                <form method="POST">
                                     {% csrf_token %}
                                     <input type="hidden" class="form-control" name="modification" value="modifier_etablissement">
                                     <div class="row">
@@ -80,22 +80,22 @@
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label" for="inputLastName">Type d'établissement</label>
-                                            <select class="select-control form-control-lg w-100" name="statut">
+                                            <select class="select-control form-control-lg w-100" name="type_etablissement">
                                                 <option value="">Choisir le type de l'Etabmissement</option>
-                                                <option {% if etablissement.type_etablissement == 'Collège' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">College</option>
-                                                <option {% if etablissement.type_etablissement == 'Lycée' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée</option>
-                                                <option {% if etablissement.type_etablissement == 'Mixte' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée Mixte</option>
-                                                <option {% if etablissement.type_etablissement == 'Autre' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Autre</option>
+                                                <option {% if etablissement.type_etablissement == 'college' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">College</option>
+                                                <option {% if etablissement.type_etablissement == 'lycee' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée</option>
+                                                <option {% if etablissement.type_etablissement == 'mixte' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée Mixte</option>
+                                                <option {% if etablissement.type_etablissement == 'autre' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Autre</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label" for="inputLastName">IEF</label>
                                             <select class="select-control form-control-lg w-100" name="ief" id="">
                                                 <option value="">Choisir l'IEF</option>
-                                                <option {% if etablissement.ief == "Bignona1" %} selected {% endif %} value="Bignona1">Bignona 1</option>
-                                                <option {% if etablissement.ief == "Bignona2" %} selected {% endif %} value="Bignona2">Bignona 2</option>
-                                                <option {% if etablissement.ief == "Oussouye" %} selected {% endif %} value="Oussouye">Oussouye</option>
-                                                <option {% if etablissement.ief == "Ziguinchor" %} selected {% endif %} value="Ziguinchor">Ziguinchor</option>                                            </select> 
+                                                <option {% if etablissement.ief_id == 1 %} selected {% endif %} value=1>Bignona 1</option>
+                                                <option {% if etablissement.ief_id == 2 %} selected {% endif %} value=2>Bignona 2</option>
+                                                <option {% if etablissement.ief_id == 3 %} selected {% endif %} value=3>Oussouye</option>
+                                                <option {% if etablissement.ief_id == 4 %} selected {% endif %} value=4>Ziguinchor</option>                                            </select> 
                                         </div>
                                     </div>
                                     <div class="row">
@@ -149,7 +149,7 @@
                                                 <option {% if quote.annee_scolaire == annee %} selected {% endif %} value="{{ annee.id }}"> {{ annee }} </option>
                                                 {% endfor %}
                                             </select> 
-                                        </div>
+                                        </div> 
                                         <div class="mb-3 col-md-2"> 
                                             <label class="form-label" for="effectif">Effectif</label>
                                             <input type="text" class="form-control" name="effectif" value="{{quote.effectif}}">
@@ -206,11 +206,11 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label" for="ce">Ajouté par</label>
-                                            <input type="text" class="form-control" name="added_by" value="{{ etablissement.added_by.name}}" disabled>
+                                            <input type="text" class="form-control" name="added_by" value="{{ request.user.name }}" disabled>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label" for="ce">Conseiller responsable</label>
-                                            <input type="text" class="form-control" name="conseiller" value="{{ etablissement.conseiller.name}}" disabled>
+                                            <input type="text" class="form-control" name="conseiller" value="{{ etablissement.save_by.name}}" disabled>
                                         </div>
                                     
                                     </div>

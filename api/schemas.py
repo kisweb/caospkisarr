@@ -39,7 +39,7 @@ class ProfileSchema(ModelSchema):
 
     class Meta:
         model = Profile
-        fields = ("id", "user", "bio", "phone_number", "birth_date", "role")
+        fields = ("id", "user","username", "bio", "phone_number", "birth_date", "role")
 
 
 class EtablissementSchema(ModelSchema):
@@ -50,13 +50,13 @@ class EtablissementSchema(ModelSchema):
 
 class CreateEtablissementSchema(Schema):
     name: str
-    ief: str
+    ief_id: int
     type_etablissement: str
     nomce: str | None = None
     email: str | None = None
     phone: str | None = None
     address: str | None = None
-    save_by_id: str | None = None
+    save_by_id: int | None = None
 
 
 class Error(Schema):

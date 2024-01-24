@@ -26,15 +26,7 @@
 			</div>
 			<div class="card">
                 <div class="card-body">
-                    <div class="m-sm-4">
-
-                        <form action="">
-                            {% csrf_token %}
-                            {{ form|crispy }}
-
-                            <button type="submit" class="btn btn-info">Enregistrer les données</button>
-                        </form>
-                        
+                    <div class="m-sm-4">                        
                         <form method="POST" action=".">
                             {% csrf_token %} 
                             <div class="row">
@@ -66,11 +58,10 @@
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">IEF</label>
                                     <select class="select-control form-control-lg w-100" name="ief">
-                                        <option value="">Choix IEF</option>
-                                        <option  value="Bignona1">Bignona 1</option>
-                                        <option  value="Bignona2">Bignona 2</option>
-                                        <option  value="Oussouye">Oussouye</option>
-                                        <option  value="Ziguinchor">Ziguinchor</option>
+                                        <option  value="1">Bignona 1</option>
+                                        <option  value="2">Bignona 2</option>
+                                        <option  value="3">Oussouye</option>
+                                        <option  value="4">Ziguinchor</option>
                                     </select>
                                 </div>
                             </div>

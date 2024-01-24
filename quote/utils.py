@@ -36,7 +36,7 @@ def pagination(request, quotes):
 def get_quote(annee:int |None = None):
     """ get quote fonction """
 
-    obj = Quote.objects.get(annee_scolaire=annee)
+    obj = Quote.objects.filter(annee_scolaire=annee)
 
     etablissements = obj.etablissement_set.all()
 

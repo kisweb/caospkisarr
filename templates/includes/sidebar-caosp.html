@@ -34,7 +34,7 @@
                 
                 <li class="sidebar-item  {% if 'quote-list' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'quote:index' %}">Quoteparts</a></li>
                 {% if request.user.is_authenticated %}
-                    <li class="sidebar-item  {% if 'mon-etablissement' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="#">Mon Etablissement</a></li>
+                    <li class="sidebar-item  {% if 'mon-etablissement' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'quote:quote-pdf' %}">Mon PDF</a></li>
                 {% endif%}
             </ul>
         </ul>

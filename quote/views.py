@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.views import View
 from etablissement.models import Etablissement, Quote, get_montant_general
 from quote.filters import QuoteFilterSet
@@ -35,6 +35,8 @@ paid
 is_ok
 comments
 """
+# "C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+config = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
 
 # Create your views here.
 
@@ -228,47 +230,78 @@ class QuoteVisualizationView(LoginRequiredSuperuserMixim, View):
         return render(request, self.template_name, context)
 
 def voir_quotes(request):
+    
     quotes = Quote.objects.filter(annee_scolaire=1).all()
+    
     return render(request, 'quote_part/quote.html', {
         'quotes': quotes,
         'ladate': datetime.datetime.today(),
-        'segment': 'etablissement-list',
+        'segment': 'quote-list',
+        'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))
+
+    })
+
+def getPDF(request):
+    
+    quotes = Quote.objects.filter(annee_scolaire=1).all()
+    
+    return render(request, 'quote_part/mypdf.html', {
+        'quotes': quotes,
+        'ladate': datetime.datetime.today(),
+        'segment': 'quote-list',
         'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))
 
     })
 
 
-@superuser_required
+
 def get_quote_pdf(request):
-    """ generate pdf file from html file """
+    
 
+    # # get html file
+    # template = get_template('quote_part/quote.html')
 
-    context = get_quote(annee=1)
+    # # render html with context variables
 
-    context['date'] = datetime.datetime.today()
+    # html = template.render(context)
 
-    # get html file
-    template = get_template('quote_part/quote-pdf.html')
+    # # options of pdf format 
 
-    # render html with context variables
-
-    html = template.render(context)
-
-    # options of pdf format 
-
+    # options = {
+    #     'page-size': 'A4',
+    #     'encoding': 'UTF-8',
+    #     "enable-local-file-access": ""
+        
+    # }
+    
+    cookie_list = request.COOKIES
+    # pass the cookies. You can add whatever other options you want to use
     options = {
-        'page-size': 'Letter',
-        'encoding': 'UTF-8',
-        "enable-local-file-access": ""
-    }
+        'page-size': 'A4',
+        'margin-top': '4mm',
+        'margin-right': '4mm',
+        'margin-bottom': '4mm',
+        'margin-left': '4mm',
+        'encoding': "UTF-8",
+        'custom-header' : [
+            ('Accept-Encoding', 'gzip')
+            ],
+        'cookie' : [
+            ('csrftoken', cookie_list['csrftoken']),
+            ('sessionid', cookie_list['sessionid']),
+            ]
+        }
 
     # generate pdf 
+    """ generate pdf file from html file """
+    # response = HttpResponse(pdf, content_type='application/pdf')
+    # pdf = pdfkit.from_string(html, False, options)
 
-    pdf = pdfkit.from_string(html, False, options)
+    pdf = pdfkit.from_url(request.build_absolute_uri(reverse('quote:quote-pdf')),False, options=options, configuration=config)
 
     response = HttpResponse(pdf, content_type='application/pdf')
 
-    response['Content-Disposition'] = "attachement"
+    response['Content-Disposition'] = 'attachment; filename="kisarr.pdf"'
 
     return response
 

@@ -5,7 +5,6 @@ from django.db.models.signals import post_save
 from django.utils.translation import gettext_lazy as _
 
 
-
 class CustomUserManager(UserManager):
     def _create_user_(self, name, email, password, **extra_fields):
         if not email:

@@ -1,6 +1,6 @@
 
 from django.db import connection
-
+from pprint import pprint
 
 from etablissement.models import Etablissement, Ief
 
@@ -10,6 +10,6 @@ def run():
     # mail = email.split('@')[0]
     # # email = mail+'@caosp.zig'
     # print(mail)
-    etablissement = Etablissement.objects.first()
-    print(etablissement)
-    print(connection.queries)
+    etablissements = Etablissement.objects.all()
+    pprint(etablissements[0])
+    pprint(connection.queries)

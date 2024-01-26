@@ -4,6 +4,7 @@ from etablissement.models import Etablissement, Quote
 
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from pprint import pprint
 
 
 def validate_fullname(self):
@@ -86,12 +87,12 @@ def run():
     # print(obj)
 
     user = Profile.objects.get(pk=1)
-    print(user)
+    pprint(user)
     first_name = user.first_name
     last_name = user.last_name
     name = user.first_name+" "+user.last_name
     pseudo = generate_username(self=user, full_name=('MODOU OUMAR DIOUF'), Model=Profile)
     validate_fullname(name)
-    print(pseudo+'@caosp.zig')
-    print(get_first_name('el hadji MODOU ISSA DIOP'))
+    pprint(pseudo+'@caosp.zig')
+    pprint(get_first_name('el hadji MODOU ISSA DIOP'))
     

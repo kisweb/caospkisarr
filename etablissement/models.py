@@ -45,7 +45,7 @@ class Etablissement(models.Model):
     name = models.CharField(max_length=132)
     slug: str = AutoSlugField(populate_from="name")
     code = models.CharField(max_length=16)
-    ief = models.ForeignKey(Ief, on_delete=models.SET_NULL, null=True)
+    ief = models.ForeignKey(Ief, related_name="etablissements", on_delete=models.SET_NULL, null=True)
     type_etablissement = models.CharField(
         max_length=20, choices=TypeEtablissement.choices, null=True, default='autre'
     )
@@ -54,7 +54,7 @@ class Etablissement(models.Model):
     phone = models.CharField(max_length=15, null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
-    save_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    save_by = models.ForeignKey(User,related_name="etablissements", on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = "Etablissement"
@@ -63,9 +63,11 @@ class Etablissement(models.Model):
     def __str__(self):
         return self.slug
 
+    @property
     def nbEtabsIef(self, id:int=None, **kwargs):
         etabs = self.objects.filter(ief_id=id).all()
-        return etabs.count()
+        return etabs.count()    
+
 
 class Quote(models.Model):
     class QuoteAnneeScolaires(models.TextChoices):
@@ -80,12 +82,12 @@ class Quote(models.Model):
 
 
     etablissement = models.ForeignKey(
-        Etablissement, on_delete=models.CASCADE, null=True
+        Etablissement, related_name="quotes", on_delete=models.CASCADE, null=True
     )
     annee_scolaire = models.ForeignKey(
-        AnneeScolaire, on_delete=models.SET_NULL, null=True
+        AnneeScolaire, related_name="quotes", on_delete=models.SET_NULL, null=True
     )
-    save_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    save_by = models.ForeignKey(User, related_name="quotes", null=True, on_delete=models.SET_NULL)
     slug = models.SlugField(max_length=130)
     effectif = models.IntegerField(null=False, blank=False, default=0)
     versement = models.IntegerField(null=False, blank=False, default=0)
@@ -126,13 +128,12 @@ class Quote(models.Model):
     def get_montant(self):
         montant = self.effectif * 100
         return montant
-
-
-def get_montant_general(annee: int|None=None, **kwargs):
-    quotes = Quote.objects.filter(annee_scolaire_id=annee).all()
+    
+    
+def get_montant_general(annee:int |None = 1, **kwargs):
+    quotes = Quote.objects.filter(annee_scolaire=annee).all()
     montant_general = sum(quote.versement for quote in quotes)
     return montant_general
 
-def nombre_etablissement_ief(ief:str=None):
-    etablissements = Etablissement.objects.filter(ief=ief, active=True).all()
-    return etablissements.count()
+
+

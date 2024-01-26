@@ -18,7 +18,21 @@
 	<link href="{% static 'assets/css/app.css' %}" rel="stylesheet">
 
     <!-- Specific Page CSS goes HERE  -->
-    {% block stylesheets %}{% endblock stylesheets %}
+    {% block stylesheets %}
+	<style>
+		@media print {
+		  .no-print {
+			display: none !important;
+		  }
+		}
+		@media not print {
+		  .print {
+			display: block !important;
+			width: auto;
+		  }
+		}
+	  </style>
+	{% endblock stylesheets %}
 
 </head>
 

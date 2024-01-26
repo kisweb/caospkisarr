@@ -19,21 +19,25 @@
 
 {% endblock stylesheets %} {% block content %}
 
-<div class="container">
+<div class="container min-vh-92">
   <!-- Row start -->
-  <div class="no-print row gutters mt-2">
+  <div class="d-print-none row gutters mt-2">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
       <div class="custom-actions-btns mb-5">
-        <a href="{% url 'quote:pdf' %}" class="btn btn-primary">
-          <i class="icon-download"></i> Download
-        </a>
         <button
           type="button"
           onClick="window.print()"
+          class="btn btn-success"
+        >
+          <i class="icon-printer"></i> Imprimer
+        </button>
+        <a
+          type="button"
+          href="{% url 'quote:index' %}"
           class="btn btn-secondary"
         >
-          <i class="icon-printer"></i> Print
-        </button>
+          <i class="icon-printer"></i> Retour
+        </a>
       </div>
     </div>
   </div>
@@ -47,10 +51,16 @@
               <!-- Row start -->
               <div class="row gutters mx-2">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                  <div class="text-center mb-2">
+                    <img
+                      src="{% static 'assets/img/logo/drapeau.png' %}"
+                      width="64"
+                      alt="sn"
+                      srcset=""
+                    />
+                  </div>
                   <h4 class="text-center">République du Sénégal</h4>
-                  <h6 class="text-center">
-					  -=-=-=-=-=-
-				  </h6>
+                  <h6 class="text-center">-=-=-=-=-=-</h6>
                   <h6 class="text-center">Un Peuple - Un But - Une Foi</h6>
                 </div>
               </div>
@@ -58,7 +68,15 @@
 
               <!-- Row start -->
               <div class="row gutters">
-                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+                  <div class="mb-3 mx-6">
+                    <img
+                      src="{% static 'assets/img/logo/MEN.png' %}"
+                      width="96"
+                      alt="men"
+                      srcset=""
+                    />
+                  </div>
                   <h5 class="invoice-logo">
                     Ministère de l'Education nationale
                   </h5>
@@ -69,11 +87,12 @@
                     <strong> C.A.O.S.P. de Ziguinchor </strong>
                   </h4>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                  <address class="text-right">
-                    Donald Programmer Inc, 45 NorthWest<br />
-                    Cameroon, Douala<br />
-                    00000 00000
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+                  <address class="text-left">
+                    <br /><br />
+                    Ziguinchor, ce {{ladate}}<br />
+                    <br />
+                    n° ________________/caosp/z/caosp/
                   </address>
                 </div>
               </div>
@@ -83,7 +102,7 @@
               <div class="row mt-4">
                 <div class="text-center col-md-12 col-sm-12 col-12">
                   <h2>
-                    <strong classs="h2"> QUOTEPARTS 2023-2024 </strong>
+                    <strong classs="h2"> QUOTEPARTS {{ quotes.first.annee_scolaire }} </strong>
                   </h2>
                   <p classs="h6">Situation arrétée le {{ ladate }}</p>
                 </div>
@@ -99,10 +118,12 @@
                   <table class="table table-sm">
                     <thead>
                       <tr>
-                        <th>Année</th>
+                        <th>#</th>
                         <th>Etablissement</th>
                         <th>Effectif</th>
                         <th>Versé</th>
+                        <th>Date</th>
+                        <th>Quitus</th>
                         <th>Statut</th>
                         <th class="text-right"></th>
                       </tr>
@@ -110,21 +131,23 @@
                     <tbody>
                       {% for quote in quotes%}
                       <tr>
-                        <td>{{ quote.annee_scolaire }}</td>
+                        <td>{{ quote.id }}</td>
                         <td>
                           {{quote.etablissement.name}}
                           ({{quote.etablissement.type_etablissement}})
                         </td>
                         <td>{{quote.effectif}}</td>
                         <td>{{quote.versement}}</td>
+                        <td>{{quote.last_updated_date|date:"d/m/Y" }}</td>
+                        <td>{{quote.versement}}</td>
                         <td
                           class="{% if quote.get_montant != quote.versement %} text-right bg-secondary text-white {% endif %}"
                         >
                           {% if quote.is_ok == True %} VALIDE {% else %}
                           <span
-                            class="text-white bg-danger px-3 rounded-radius-25"
+                            class="text-white bg-danger px-3 border-radius-25"
                           >
-                            <i class="mdi mdi-arrow-bottom-right"></i> REVOIR
+                             attente : {{ quote.get_montant}} 
                           </span>
                           {% endif %}
                         </td>
@@ -132,12 +155,14 @@
                       </tr>
                       {% endfor%}
                       <tr>
-						  <td class="h4 text-right" colspan="6">
-							<hr />
-						</td>
+                        <td class="h4 text-right" colspan="7">
+                          <hr />
+                        </td>
                       </tr>
                       <tr>
-                        <td class="h4 text-right" colspan="3">Montant total : </td>
+                        <td class="h4 text-right" colspan="5">
+                          Montant total :
+                        </td>
                         <td class="h3 text-left" colspan="2">
                           {{ montantTotal}} FCFA
                         </td>
@@ -149,12 +174,9 @@
               <!-- Row end -->
             </div>
 
-			<hr />
-            <div class="invoice-footer">
+            <div class="">
               <div class="row mx-10">
-                <div class="col-md-1">
-                  
-                </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-7">
                   Ziguinchor le _____/_____/____________/
                 </div>
@@ -169,6 +191,9 @@
             <br />
             <br />
             <br />
+            <div class="mb-0 float-right">
+                caospzig@gmail.com
+            </div>
           </div>
         </div>
       </div>

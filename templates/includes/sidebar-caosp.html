@@ -1,5 +1,5 @@
 {% load static %}
-<nav id="sidebar" class="sidebar no-print">
+<nav id="sidebar" class="sidebar  d-print-none">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="{% url 'core:index' %}">
             <img src="{% static 'assets/img/avatars/taureau.png' %}" class="rounded-circle" alt="logo" width="36px" height="36px">
@@ -33,9 +33,7 @@
                 {% endif %}
                 
                 <li class="sidebar-item  {% if 'quote-list' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'quote:index' %}">Quoteparts</a></li>
-                {% if request.user.is_authenticated %}
-                    <li class="sidebar-item  {% if 'mon-etablissement' in segment %} active bg-red-600{% endif %}"><a class="sidebar-link" href="{% url 'quote:quote-pdf' %}">Mon PDF</a></li>
-                {% endif%}
+                
             </ul>
         </ul>
         <div class="dropdown-divider"></div>

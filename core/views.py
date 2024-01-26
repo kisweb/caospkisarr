@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from etablissement.models import Etablissement, Ief, get_montant_general, nombre_etablissement_ief
+from etablissement.models import Etablissement, Ief, get_montant_general
 from account.models import User
 import json
 from login_required import login_not_required

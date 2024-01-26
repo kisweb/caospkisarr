@@ -43,39 +43,25 @@ config = pdfkit.configuration(wkhtmltopdf=r"C:\Program Files\wkhtmltopdf\bin\wkh
 class QuoteView(LoginRequiredSuperuserMixim,View):
     """ Main view """
 
-    templates_name = 'quote_part/index.html'
-
-    quotes = Quote.objects.all().order_by('-quote_date_time')
-    
-    context = {
-        'quotes': quotes,
-        'segment': 'quote-list'
-    }
+    templates_name = 'quote_part/index.html'   
 
     def get(self, request, *args, **kwags):
-        filterset = QuoteFilterSet(request.GET, queryset=Quote.objects.all())
+        filterset = QuoteFilterSet(request.GET, queryset=Quote.objects.prefetch_related("annee_scolaire", "etablissement"))
         lesquotes = filterset.qs
         page_num = request.GET.get('page', 1)
         per_page = int(request.GET.get('per_page', 3))
         paginator = Paginator(lesquotes, per_page)
         
         try:
-            quotes = paginator.page(page_num)
+            lesquotes = paginator.page(page_num)
         except PageNotAnInteger:
             # if page is not an integer, deliver the first page
-            quotes = paginator.page(1)
+            lesquotes = paginator.page(1)
         except EmptyPage:
             # if the page is out of range, deliver the last page
-            quotes = paginator.page(paginator.num_pages)
+            lesquotes = paginator.page(paginator.num_pages)
         
-        items = pagination(request, self.quotes)
-        if request.GET.get('quote_annee') == "ALL" or request.GET.get('quote_annee') is None:
-            quote_qs = self.quotes.all()
-        else:
-            quote_annees = request.GET.getlist('quote_annee')
-            quote_qs = self.quotes.filter(annee_scolaire__in=quote_annees)
-
-        context = {'segment': 'quote-list', 'quotes': quotes, 'filter': filterset, 'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))}
+        context = {'segment': 'quote-list', 'quotes': lesquotes, 'filter': filterset, 'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))}
 
         return render(request, self.templates_name, context=context)
 
@@ -230,80 +216,16 @@ class QuoteVisualizationView(LoginRequiredSuperuserMixim, View):
         return render(request, self.template_name, context)
 
 def voir_quotes(request):
-    
-    quotes = Quote.objects.filter(annee_scolaire=1).all()
+    annee = request.GET.get('quote_annee')
+    quotes = QuoteFilterSet(request.GET, queryset=Quote.objects.prefetch_related('annee_scolaire', 'etablissement'))
     
     return render(request, 'quote_part/quote.html', {
-        'quotes': quotes,
+        'quotes': quotes.qs,
         'ladate': datetime.datetime.today(),
+        'periode': int(request.GET.get('annee_scolaire')),
+        'filter': QuoteFilterSet,
         'segment': 'quote-list',
-        'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))
+        'montantTotal': get_montant_general(int(request.GET.get('annee_scolaire', 1)))
 
     })
-
-def getPDF(request):
-    
-    quotes = Quote.objects.filter(annee_scolaire=1).all()
-    
-    return render(request, 'quote_part/mypdf.html', {
-        'quotes': quotes,
-        'ladate': datetime.datetime.today(),
-        'segment': 'quote-list',
-        'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))
-
-    })
-
-
-
-def get_quote_pdf(request):
-    
-
-    # # get html file
-    # template = get_template('quote_part/quote.html')
-
-    # # render html with context variables
-
-    # html = template.render(context)
-
-    # # options of pdf format 
-
-    # options = {
-    #     'page-size': 'A4',
-    #     'encoding': 'UTF-8',
-    #     "enable-local-file-access": ""
-        
-    # }
-    
-    cookie_list = request.COOKIES
-    # pass the cookies. You can add whatever other options you want to use
-    options = {
-        'page-size': 'A4',
-        'margin-top': '4mm',
-        'margin-right': '4mm',
-        'margin-bottom': '4mm',
-        'margin-left': '4mm',
-        'encoding': "UTF-8",
-        'custom-header' : [
-            ('Accept-Encoding', 'gzip')
-            ],
-        'cookie' : [
-            ('csrftoken', cookie_list['csrftoken']),
-            ('sessionid', cookie_list['sessionid']),
-            ]
-        }
-
-    # generate pdf 
-    """ generate pdf file from html file """
-    # response = HttpResponse(pdf, content_type='application/pdf')
-    # pdf = pdfkit.from_string(html, False, options)
-
-    pdf = pdfkit.from_url(request.build_absolute_uri(reverse('quote:quote-pdf')),False, options=options, configuration=config)
-
-    response = HttpResponse(pdf, content_type='application/pdf')
-
-    response['Content-Disposition'] = 'attachment; filename="kisarr.pdf"'
-
-    return response
-
-
 

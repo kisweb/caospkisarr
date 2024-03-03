@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label" for="inputFirstName">Etablissement</label>
-                                            <input type="text" class="form-control" name="etablissement" value="{{ etablissement.name}}">
+                                            <input type="text" class="form-control" name="name" value="{{ etablissement.name}}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label" for="inputLastName">Email de l'Etablissement</label>
@@ -82,20 +82,20 @@
                                             <label class="form-label" for="inputLastName">Type d'établissement</label>
                                             <select class="select-control form-control-lg w-100" name="type_etablissement">
                                                 <option value="">Choisir le type de l'Etabmissement</option>
-                                                <option {% if etablissement.type_etablissement == 'college' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">College</option>
-                                                <option {% if etablissement.type_etablissement == 'lycee' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée</option>
-                                                <option {% if etablissement.type_etablissement == 'mixte' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Lycée Mixte</option>
-                                                <option {% if etablissement.type_etablissement == 'autre' %} selected {% endif %} value="{{ etablissement.type_etablissement }}">Autre</option>
+                                                <option {% if etablissement.type_etablissement == 'Collège' %} selected {% endif %} value="Collège">College</option>
+                                                <option {% if etablissement.type_etablissement == 'Lycée' %} selected {% endif %} value="Lycée">Lycée</option>
+                                                <option {% if etablissement.type_etablissement == 'mixte' %} selected {% endif %} value="mixte">Lycée Mixte</option>
+                                                <option {% if etablissement.type_etablissement == 'autre' %} selected {% endif %} value="autre">Autre</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label class="form-label" for="inputLastName">IEF</label>
                                             <select class="select-control form-control-lg w-100" name="ief" id="">
                                                 <option value="">Choisir l'IEF</option>
-                                                <option {% if etablissement.ief_id == 1 %} selected {% endif %} value=1>Bignona 1</option>
-                                                <option {% if etablissement.ief_id == 2 %} selected {% endif %} value=2>Bignona 2</option>
-                                                <option {% if etablissement.ief_id == 3 %} selected {% endif %} value=3>Oussouye</option>
-                                                <option {% if etablissement.ief_id == 4 %} selected {% endif %} value=4>Ziguinchor</option>                                            </select> 
+                                                <option {% if etablissement.ief_id == 1 %} selected {% endif %} value="1">Bignona 1</option>
+                                                <option {% if etablissement.ief_id == 2 %} selected {% endif %} value="2">Bignona 2</option>
+                                                <option {% if etablissement.ief_id == 3 %} selected {% endif %} value="3">Oussouye</option>
+                                                <option {% if etablissement.ief_id == 4 %} selected {% endif %} value="4">Ziguinchor</option>                                            </select> 
                                         </div>
                                     </div>
                                     <div class="row">

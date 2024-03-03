@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from etablissement.models import Etablissement, Ief, get_montant_general
+from anneescolaire.models import AnneeScolaire
 from account.models import User
 import json
 from login_required import login_not_required
@@ -17,6 +18,7 @@ def dashboard(request):
 def index(request):
     # lesresp = Ief.objects.values_list('conseiller', flat=True).distinct()  # returns a list of tuples..
     mesetablissements = Etablissement.objects.all()
+    etablissement = mesetablissements.filter(code=request.user.profile.code_etablissement).first()
     mesusers = User.objects.all()
     # ibou = mesusers.get('name')
     # json_object = json.dumps(employee_details, indent = 4) 
@@ -25,9 +27,10 @@ def index(request):
     
     context = {
         'etablissements': mesetablissements,
+        'etablissement': etablissement,
         'users': mesusers,
         'iefs': Ief.objects.all(),
-        'get_montant_general': get_montant_general(1)
+        'get_montant_general': get_montant_general
     }
     return render(request, 'core/index.html', context=context)
 

@@ -9,7 +9,7 @@ from pprint import pprint
 
 def run():
     annee = AnneeScolaire.objects.get(statut='anneeEnCours')
-    pprint(get_montant_general(annee=annee, ief='Bignona1'))
+    pprint(get_montant_general())
     
     m = Quote.objects.aggregate(part_moyenne=Avg("versement"))
     pprint(m)

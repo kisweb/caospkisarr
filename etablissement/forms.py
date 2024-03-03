@@ -12,7 +12,6 @@ class FilterQuoteAnneeForm(forms.ModelForm):
         fields = ('id', 'annee')
     
     
-    
 class FilterIefForm(forms.ModelForm):
     iefs = forms.ModelChoiceField(
         queryset=Ief.objects.all(),

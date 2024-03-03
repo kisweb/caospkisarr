@@ -11,5 +11,7 @@ def run():
     # # email = mail+'@caosp.zig'
     # print(mail)
     etablissements = Etablissement.objects.all()
-    pprint(etablissements[0])
+    pprint(etablissements.first().__dict__)
     pprint(connection.queries)
+    
+    

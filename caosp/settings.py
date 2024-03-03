@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'ninja',
     'corsheaders',
+    'commande',
 ]
 # postgres://caosp:8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5@dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com/quoteparts
 MIDDLEWARE = [
@@ -92,6 +93,8 @@ ROOT_URLCONF = "caosp.urls"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:8001",
+    
 ]
 
 CORS_ALLOW_METHODS = (
@@ -111,8 +114,6 @@ CORS_ALLOW_HEADERS = (
     "x-csrftoken",
     "x-requested-with",
 )
-
-
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -161,7 +162,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "caosp.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -172,24 +172,24 @@ WSGI_APPLICATION = "caosp.wsgi.application"
 #     }
 # }
 
-DATABASES = {
-
-    'default': dj_database_url.parse(config('DATABASE_URL'))
-
-}
-
 # DATABASES = {
 
-#     'default': {
+#     'default': dj_database_url.parse(config('DATABASE_URL'))
 
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'caospkisarr',
-#         'USER': 'kisarr',
-#         'PASSWORD': 'kisarr',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
 # }
+
+DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'caospkisarr',
+        'USER': 'kisarr',
+        'PASSWORD': 'kisarr',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # PGPASSWORD=8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5 psql -h dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com -U caosp quoteparts
 
@@ -210,7 +210,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -250,7 +249,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "account:login"
 
 INTERNAL_IPS = [
     "127.0.0.1",

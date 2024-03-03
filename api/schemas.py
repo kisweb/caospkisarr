@@ -59,6 +59,17 @@ class CreateEtablissementSchema(Schema):
     save_by_id: int | None = None
 
 
+class CreateProfileSchema(Schema):
+    user: UserSchema
+    role: RoleSchema | None = None    
+    first_name: str |None = None
+    last_name: str |None = None
+    username: str |None = None
+    bio: str |None = None
+    phone_number: str |None = None
+    birth_date: str |None = None
+    
+
 class Error(Schema):
     message: str
 

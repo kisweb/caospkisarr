@@ -4,24 +4,18 @@ from etablissement.models import Etablissement, Quote, get_montant_general
 from quote.filters import QuoteFilterSet
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 from django.http import HttpResponse
-
 import pdfkit
-
 import datetime
 from helpers.util import *
-
 from django.template.loader import get_template
-
 from django.db import transaction
-
 from .utils import pagination, get_quote
-
 from .decorators import *
 from caosp.settings import ANNEES
 
 from django.utils.translation import gettext as _
+
 """
 etablissement
 annee_scolaire
@@ -41,13 +35,17 @@ comments
 class QuoteView(LoginRequiredSuperuserMixim,View):
     """ Main view """
 
-    templates_name = 'quote_part/index.html'   
+    templates_name = 'quote/index.html'   
 
     def get(self, request, *args, **kwags):
-        filterset = QuoteFilterSet(request.GET, queryset=Quote.objects.prefetch_related("annee_scolaire", "etablissement"))
+        
+        if request.method == 'GET':
+            annee = request.GET.get('annee_scolaire') or None
+            
+        filterset = QuoteFilterSet(request.GET, queryset=Quote.objects.filter(paid=True).prefetch_related("annee_scolaire", "etablissement"))
         lesquotes = filterset.qs
         page_num = request.GET.get('page', 1)
-        per_page = int(request.GET.get('per_page', 3))
+        per_page = request.GET.get('per_page', 10)
         paginator = Paginator(lesquotes, per_page)
         
         try:
@@ -59,7 +57,7 @@ class QuoteView(LoginRequiredSuperuserMixim,View):
             # if the page is out of range, deliver the last page
             lesquotes = paginator.page(paginator.num_pages)
         
-        context = {'segment': 'quote-list', 'quotes': lesquotes, 'filter': filterset, 'montantTotal': get_montant_general(int(request.GET.get('quote_annee') or 1))}
+        context = {'segment': 'quote-list', 'quotes': lesquotes, 'filter': filterset, 'montantTotal': get_montant_general(annee)}
 
         return render(request, self.templates_name, context=context)
 
@@ -132,7 +130,6 @@ class AddEtablissementView(LoginRequiredSuperuserMixim, View):
             'ief': request.POST.get('ief'),
             'code': h_random_ascii(8),
             'save_by': request.user
-
         }
 
         try:
@@ -153,11 +150,10 @@ class AddEtablissementView(LoginRequiredSuperuserMixim, View):
         return render(request, self.template_name)   
 
 
-
 class AddQuoteView(LoginRequiredSuperuserMixim, View):
     """ add a new quote view """
 
-    template_name = 'quote_part/add_quote.html'
+    template_name = 'quote/add_quote.html'
 
     quotes = Quote.objects.all()
 
@@ -204,26 +200,30 @@ class AddQuoteView(LoginRequiredSuperuserMixim, View):
 class QuoteVisualizationView(LoginRequiredSuperuserMixim, View):
     """ This view helps to visualize the quote """
 
-    template_name = 'quote_part/quote.html'
+    template_name = 'quote/quote.html'
 
     def get(self, request):
 
-        quotes = get_quote(annee=1)
+        quotes = get_quote(annee=2)
 
         context = {'quotes': quotes}
         return render(request, self.template_name, context)
 
+
 def voir_quotes(request):
-    annee = request.GET.get('quote_annee')
-    quotes = QuoteFilterSet(request.GET, queryset=Quote.objects.prefetch_related('annee_scolaire', 'etablissement'))
     
-    return render(request, 'quote_part/quote.html', {
+    if request.method == 'GET':
+            annee = request.GET.get('annee_scolaire') or None
+                  
+    quotes = QuoteFilterSet(request.GET, queryset=Quote.objects.filter(paid=True).prefetch_related('annee_scolaire', 'etablissement').order_by('id'))
+    print(request.GET.get('annee_scolaire'))
+    return render(request, 'quote/quote.html', {
         'quotes': quotes.qs,
         'ladate': datetime.datetime.today(),
-        'periode': int(request.GET.get('annee_scolaire')),
+        'periode': request.GET.get('annee_scolaire'),
         'filter': QuoteFilterSet,
         'segment': 'quote-list',
-        'montantTotal': get_montant_general(int(request.GET.get('annee_scolaire', 1)))
+        'montantTotal': get_montant_general(annee)
 
     })
 

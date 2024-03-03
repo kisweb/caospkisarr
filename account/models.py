@@ -6,33 +6,33 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserManager(UserManager):
-    def _create_user_(self, name, email, password, **extra_fields):
+    def _create_user_(self, name, username, email, password, **extra_fields):
         if not email:
             raise ValueError('You did not provide an valid e-amil address')
     
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name, **extra_fields)
+        user = self.model(email=email, name=name, username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
 
-    def create_user(self, name=None, email=None, password=None, **extra_fields):
+    def create_user(self, name=None, username=None, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user_(name, email, password, **extra_fields)
+        return self._create_user_(name, username, email, password, **extra_fields)
     
 
-    def create_superuser(self, name=None, email=None, password=None, **extra_fields):
+    def create_superuser(self, name=None, username=None, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self._create_user_(name, email, password, **extra_fields)
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255, blank=True, null=True)
+    username = models.CharField(max_length=255, blank=True, null=True)
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)

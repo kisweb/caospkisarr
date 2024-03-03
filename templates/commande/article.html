@@ -1,0 +1,64 @@
+{% extends 'layouts/base-caosp.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Gestion des Commandes - Articles
+{% endblock %}
+
+{% block content %}
+  <main class="content">
+    <div class="container p-0">
+      <h3 class="flex">
+        <strong>Article</strong>
+        <span><a class="" href="{% url 'commande:index' %}">Retour</a></span>
+      </h3>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <form role="form" method="post" action="">
+                {% csrf_token %}
+                <div class="mb-3">{{ form|crispy }}</div>
+
+                <div class="text-center mt-3">
+                  <button type="submit" name="enregistrer" class="btn btn-lg btn-primary">Enregistrer</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Code commande</th>
+                    <th>Nom Article</th>
+                    <th>Référence</th>
+                    <th>unity</th>
+                    <th>Qté</th>
+                    <th>PU</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for article in articles %}
+                    <tr>
+                      <td>{{ article.order.code }}</td>
+                      <td>{{ article.name }}</td>
+                      <td>{{ article.reference }}</td>
+                      <td>{{ article.unity }}</td>
+                      <td>{{ article.quantity }}</td>
+                      <td>{{ article.unit_price }}</td>
+                      <td class="text-right">edit</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

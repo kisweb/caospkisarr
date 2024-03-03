@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 import uuid
-
+from etablissement.models import Etablissement
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -25,17 +25,18 @@ class Role(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
     username = models.CharField(max_length=255, null=True)
+    code_etablissement = models.CharField(max_length=64, blank=True, null=True)
     bio = models.TextField(max_length=500, blank=True)
     phone_number = models.CharField(max_length=12, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    role = models.ForeignKey(Role, blank=True, null=True, on_delete=models.SET_NULL)
+    role = models.ForeignKey(Role, related_name='role', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.user.email
+        return self.user.name
 
 
 @receiver(post_save, sender=User)

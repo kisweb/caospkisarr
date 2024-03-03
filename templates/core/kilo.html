@@ -1,0 +1,365 @@
+
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechercher un dossier - Anadole ASP.NET</title>
+    <link href="/Content/css?v=wM8uVqU4TiqvPLG9pCV0XOY68xvs_OiyPk635273KxY1" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=inCVuEFe6J4Q07A0AcRsbJic_UE5MwpRMNGcOtk94TE1"></script>
+
+</head>
+<div class="container">
+    <div class="sidenav">
+        <div class="login-main-text" style="text-align:center">
+            <p>
+                <a href="Index.cshtml">
+                    <img class="img-thumbnail" src="/images/logo.png" alt="">
+                </a>
+            </p>
+            <h1>Anadole.NET</h1>
+            <p style="position: fixed; bottom: 0; width: 27%; text-align: center">© 2021 EditSoft Sénégal</p>
+            <p>
+                <a href="Index.cshtml">
+                    <img class="img-thumbnail" src="/images/armoiries.png" alt="" style="width:72px;height:82px;text-align:center">
+                </a>
+            </p>
+            <p><a class="btn btn-default" href="/rechercher_candidat?Length=0" style="width:72px">Dossier</a></p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="rechercher-form">
+            <div class="row">
+                <h3><strong class="text-primary">Espace candidat</strong></h3>
+                <h5><strong class="text-danger">Rechercher un dossier</strong></h5>
+                <h6><strong class="text-primary">Vous pouvez rechercher vôtre dossier soit avec vôtre numéro de téléphone ou vôtre numéro de carte d'identité nationale</strong></h6>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+<form action="/rechercher_candidat/rechercher" method="post">                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="Examen:">Examen:</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="id_examen" name="id_examen" style="width:198px"><option value="1">CFEE</option>
+<option value="2">LEMBA</option>
+<option value="3">DAARA RAMA</option>
+<option value="4">LSED</option>
+<option value="5">TESTING BFEM NF</option>
+<option value="10">BFEM</option>
+<option value="20">CEAP</option>
+<option value="21">CAP</option>
+<option value="22">CFS EM</option>
+<option value="23">CFS IAD</option>
+<option value="24">BSC1</option>
+<option value="25">BSC2</option>
+<option value="26">CFSAP</option>
+<option value="27">CFS IFADEM</option>
+<option value="28">CFSEM REMPLACEMENT</option>
+<option value="29">CFS MC-MCC</option>
+</select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="Session:">Session:</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="an" name="an" style="width:198px"><option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+<option value="2031">2031</option>
+</select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="T_l:">T&#233;l:</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="n_tel" placeholder="Nº téléphone ?" style="width:160px">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" style="height:20px" /></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="CNI:">CNI:</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="n_cni" placeholder="Nº carte d'identité ?" style="width:160px">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" style="height:20px" /></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+</form>                    </div>
+                    <div class="col-md-6">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="pill" href="#g1">Dossier</a></li>
+                            <li><a data-toggle="pill" href="#g2">Autres Infos</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="g1" class="tab-pane fade in active">
+                                <br />
+                                <dl class="dl-horizontal">
+
+                                    <dt>
+                                        ID Dossier: 
+                                    </dt>
+
+                                    <dd class="text-danger">
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        ID Transaction: 
+                                    </dt>
+
+                                    <dd class="text-success">
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Session: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Examen: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Option: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Centre: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        IEF *: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Etablissement/Service:
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        N&#176;Inscrit: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Pr&#233;nom(s): 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Nom: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Date de naissance: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Lieu de naissance: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        T&#233;l: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        IEN: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        R&#233;sultat:
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                </dl>
+
+                            </div>
+                            <div id="g2" class="tab-pane fade">
+                                <br />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        WhatsApp: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Email: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Quittance: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Date paie.: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Pr&#233;nom(s) p&#232;re: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Pr&#233;nom(s)  m&#232;re: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+
+                                    <dt>
+                                        Nom m&#232;re: 
+                                    </dt>
+
+                                    <dd>
+                                        
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <hr />
+
+                    </div>
+                    <div class="col-md-offset-6 col-md-6">
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/bundles/jquery?v=kK_kuf_Ppg10yQgSxi46eeTAGM9mcr_umjPdmJkc1301"></script>
+
+<script src="/bundles/Content"></script>
+
+
+<!-- login CSS -->
+<link href="/Content/login.css" rel="stylesheet" />
+<!--bootstrap-->
+<link href="/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<script src="/Scripts/bootstrap.min.js"></script>
+<script src=https://touchpay.gutouch.com/touchpay/script/prod_touchpay-0.0.1.js type="text/javascript"></script>
+<!-- gridmvc -->
+<script src="/Scripts/gridmvc.js" type="text/javascript"></script>
+<script src="/Scripts/gridmvc.min.js" type="text/javascript"></script>
+<script src="/Scripts/gridmvc.lang.fr.js" type="text/javascript"></script>
+<link href="/Content/Gridmvc.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    function calltouchpay() {
+        var r = confirm("Voulez vous procédez au paiement des droits d'inscription.\nMontant à payer : ?");
+        if (r == true) {
+            if ('' != "" && ('' == "" || parseFloat('') < 1)) {
+                sendPaymentInfos(
+                    '',
+                    'MINSN9706',
+                    'L6B9Wr%_M?cchxdN3-IeK3o@4q@K7X?2ANQ!V5$CzTd@lp9gNO',
+                    'education.sn',
+                    'https://' + $(location).attr('host') + '/rechercher_candidat/paiement_succes',
+                    'https://' + $(location).attr('host') + '/rechercher_candidat/paiement_echec', '',
+                    '', '', '', '', ''
+                );
+            } else { alert("Les droits d'inscriptions sont déjà payés,\nou aucun dossier ne répond à ces critères."); }
+        }
+    }
+</script>

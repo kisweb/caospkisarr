@@ -3,6 +3,7 @@ from etablissement.models import Etablissement, Quote
 
 
 class QuoteForm(forms.ModelForm):
+    
     class Meta:
         model = Quote 
         fields = (

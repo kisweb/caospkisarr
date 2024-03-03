@@ -222,3 +222,4 @@ def get_read_time(content):
     count = count_words(content)
     read_length_min = math.ceil(count/200.0)
     return int(read_length_min)
+

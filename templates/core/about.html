@@ -1,33 +1,66 @@
-{% extends "layouts/base-caosp.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'assets/img/icons/icon-48x48.png' %}"
+    />
 
-{% block title %} Blank Page {% endblock %} 
+    <title>CAOSP | {% block title %}Gestion des quote-parts{% endblock %}</title>
 
-<!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+    <link
+      href="{% static 'assets/css/app.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>CAOSP de Ziguinchor</title>
+  </head>
 
-{% block content %}
+  <body>
+    <div class="container">
+      <nav class="h2-1"></nav>
+      <main class="admin-wrapper">
+        <section class="empty-dashboard">
+          <h3>République du Sénégal</h3>
+          <h3>Ministère de l'Education nationale</h3>
+          <br />
 
-<main class="content">
-    <div class="container-fluid p-0">
+          <img
+            src="{% static '/assets/img/logo/MEN.png' %}"
+            alt=""
+            class="empty-logo"
+          />
+          <h3>Académie de Ziguinchor</h3>
+          <h4>Centre Académique d'Orientation Scolaire et Professionnelle</h4>
+          <p>Rue du Commerce, Escale - Ziguinchor</p>
+          <p>33 991 11 59</p>
+          <p>caospz@gmail.com</p>
+          <br />
+          <br />
+          <br />
 
-        <div class="row mb-2 mb-xl-3">
-            
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">A compléter par le CAOSP</h5>
-                    </div>
-                    <div class="card-body">
-                    </div>
-                </div>
-            </div>
+          <div class="auth-options">
+            {% if request.user.is_authenticated %}
+            <a
+            href="{% url 'core:index' %}"
+            class="button-link btn btn-primary"
+            >Tableau de bord</a>
+            <a
+            href="{% url 'account:logout' %}"
+            class="button-link btn btn-primary"
+            >Se déconnecter</a>
+            {% else %}
+            <a
+            href="{% url 'account:login' %}"
+            class="button-link btn btn-primary"
+            >Se connecter</a>
+            {% endif %}
         </div>
-        
+        </section>
+      </main>
     </div>
-</main>
-
-
-{% endblock content %}
-
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+  </body>
+</html>

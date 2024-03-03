@@ -28,7 +28,7 @@ def etablissements(request):
     lesetabs = filterset.qs
     page_num = request.GET.get('page', 1)
     per_page = int(request.GET.get('per_page', 10))
-    paginator = Paginator(lesetabs, per_page)
+    paginator = Paginator(filterset.qs, per_page)
 
     try:
         etablissements = paginator.page(page_num)
@@ -52,7 +52,6 @@ def colleges(request):
     return render(request, 'etablissement/etablissements.html', {
         'etablissements': etablissements,
         'segment': 'etablissement-list'
-
     })
 
 
@@ -61,7 +60,6 @@ def lycees(request):
     return render(request, 'etablissement/etablissements.html', {
         'etablissements': etablissements,
         'segment': 'etablissement-list'
-
     })
 
 
@@ -84,8 +82,7 @@ def add(request):
     lesusers = User.objects.all()
     types = FilterTypeEtablissementForm()
     iefs = FilterIefForm()
-    if request.method == 'POST':
-        
+    if request.method == 'POST':        
         name = request.POST.get('name')
         slug = unique_slug_generator(request.POST.get('name'))
         type_etablissement = request.POST.get('type_etablissement')
@@ -116,7 +113,7 @@ def add(request):
 def edit(request, slug):
     lesusers = User.objects.all()
     annees = AnneeScolaire.objects.all()
-    etablissement = Etablissement.objects.get(slug=slug)
+    etablissement = Etablissement.objects.filter(slug=slug).first()
     quotes = Quote.objects.filter(etablissement_id=etablissement.id)
     quote = quotes.last()
         
@@ -146,7 +143,7 @@ def edit(request, slug):
                 is_ok = is_ok,
                 comments = comments,
                 save_by_id=request.user.id,
-                etablissement_id =etablissement.id,
+                etablissement_id=etablissement.id,
                 )
                 messages.success(request,  f"Les données 'Quote part {etablissement.name}' ont été mises à jour avec succès.") 
                 return redirect(f'/etablissements/')
@@ -174,7 +171,7 @@ def edit(request, slug):
                 messages.success(request,  f"Les nouvelles données 'Quote part {etablissement.name}' ont été ajoutées avec succès.") 
                 return redirect(f'/colleges/')
             
-        if request.POST.get('modification') == 'modifier_college':
+        if request.POST.get('modification') == 'modifier_etablissement':
             print(request.POST)
             name = request.POST.get('name')
             type_etablissement = request.POST.get('type_etablissement')
@@ -186,14 +183,14 @@ def edit(request, slug):
             if etablissement:
                 etablissement.name = name
                 etablissement.type_etablissement = type_etablissement
-                etablissement.ief=ief
+                etablissement.ief_id=int(ief)
                 etablissement.address = address
                 etablissement.nomce = nomce
                 etablissement.email = email
-                etablissement.phone = phone
+                etablissement.phone = phone 
                 etablissement.save()
                 messages.success(request,   f"Les données de '{etablissement.name}' ont été mises à jour avec succès.") 
-                return redirect(f'/etablissements/{slug}/')
+                return redirect(f'/etablissements/consulter/{slug}/')
 
     return render(request, 'etablissement/edit.html', {
         'etablissement': etablissement,

@@ -13,19 +13,22 @@ from .schemas import (
     UserSchema,
     RoleSchema,
     ProfileSchema,
+    CreateProfileSchema,
     AnneeScolaireSchema,
     EtablissementSchema,
     QuoteSchema,
 )
 
 app = NinjaAPI(
-        docs_decorator=staff_member_required,
-        
-        openapi_extra={
-            "info": { "termsOfService": "https://example.com/terms/", }
-            },
-        title="CAOSP API",
-        description="Les données brutes de CAOSP de Ziguinchor pour la gestion des quoteparts"
+    docs_decorator=staff_member_required,
+    
+    openapi_extra={
+        "info": { "termsOfService": "https://example.com/terms/", }
+        },
+    title="CAOSP API",
+    description="Les données brutes de CAOSP de Ziguinchor pour la gestion des quoteparts",
+    docs_url="docs/",
+    version='2.0.0'
     )
 
 
@@ -39,6 +42,12 @@ def get_users(request):
 def get_profiles(request):
     profiles = Profile.objects.all()
     return profiles
+
+@app.post("profiles/", response={200: ProfileSchema, 404: Error})
+def create_profile(request, profile: CreateProfileSchema):
+    profile_data = profile.model_dump()
+    profile_model = Profile.objects.create(**profile_data)
+    return profile_model
 
 
 @app.get("annees/", response=list[AnneeScolaireSchema])
@@ -60,7 +69,7 @@ def get_etablissements(request):
 
 
 @app.get("etablissements/{slug}", response=EtablissementSchema)
-def get_etablissements(request, slug):
+def get_etablissement(request, slug):
     etablissement = get_object_or_404(Etablissement, slug=slug)
     return etablissement
 

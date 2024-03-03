@@ -6,7 +6,6 @@ import uuid
 from django_extensions.db.fields import AutoSlugField
 from django.db.models import F
 from helpers.util import h_random_ascii, slugify
-
 import datetime
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
@@ -39,5 +38,4 @@ class AnneeScolaire(models.Model):
     @property
     def get_annee_en_cours(self, **kwargs):
         annee = self.objects.get(statut='anneeEnCours')
-        return annee
-    
+        return annee.pk

@@ -10,15 +10,15 @@
 
 <main class="content">
    <div class="container-fluid p-0">
-      <div class="col-12 col-md-8 mx-auto">
+      <div class="col-12 col-md-10 mx-auto">
          <div class="card p-12">
 
             <div class="mx-4 mt-4 flex-container">
                <span class="h1">{{etablissement.name}}</span>
                <span class="h3 float-right"> Code : {{etablissement.code}}</span>
             </div>
-            <div class="card-body  p-12">
-               <div class="m-sm-4">
+            <div class="card-body  p-8">
+               <div class="m-sm-2">
                   <div class="mb-2">
                      <div class="flex-grow-1">
                         <strong class="float-right text-navy">IEF : {{etablissement.ief}}</strong>
@@ -27,32 +27,45 @@
                         <strong>Email : </strong> {{etablissement.email}}<br />
                         <strong class="float-right text-navy">Adresse : {{etablissement.address}}</strong>
                         <strong class="">Type : {{etablissement.type_etablissement}} </strong><br />
-                        <strong>Chef d'établissement : {{etablissement.nomce}}</strong><br />
+                        <strong>Chef d'établissement : {{etablissement.nomce}}</strong><br /><br />
+                        
                      </div>
                   </div>
                </div>
                <div class="m-sm-4">
                   <div class="mb-2">
-                     <div class="flex-grow-1">
-                        <strong> : </strong> {{etablissement.quote_set.count}}<br />
+                     <div class="flex">
+                        Nombre de cotisations :  <strong>{{etablissement.quotes.count}}</strong>
+                        <div>
+                              {% for quote in etablissement.quotes.all %}
+                              <ul class="m-1">
+                                 <li>
+                                    {{quote.annee_scolaire}} : <strong> {{ quote.versement }} FCFA</strong>
+                                 </li>
+                              </ul>
+                              {% endfor %}
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
             <div class="mx-10 m-4">
                <a href="{% url 'etablissement:index'%} " class="btn btn-outline-primary">Retour</a>
-               {% if request.user.is_staff %}
-               <a href=" {% url 'etablissement:edit' etablissement.slug %} " class="btn btn-info">Editer</a>
-               <a href=" {% url 'etablissement:edit' etablissement.slug %} " class="btn btn-success">Nouveau quotepart</a>
-               <span class="float-right">
-                  <button id="btn-etablissement-sup" type="button" data-toggle="modal" data-target="#supprimer"
-                     class="btn btn-outline-danger text-blue-600" title="Supprimer" data-id="{{ etablissement.slug }}"
-                     data-etablissement="{{etablissement.name}}">
-                     <i class="align-middle mr-2" data-feather="alert-triangle"></i>
-                     Delete
-                  </button>
-
-               </span>
+               {% if request.user.profile.code_etablissement == etablissement.code %}
+                  <a href=" {% url 'etablissement:edit' etablissement.slug %} " class="btn btn-info">Editer</a>
+                  {% endif %}
+                  {% if request.user.is_staff %}
+                  <a href=" {% url 'etablissement:edit' etablissement.slug %} " class="btn btn-success">Nouveau quotepart</a>
+                  <a href=" {% url 'etablissement:edit' etablissement.slug %} " class="btn btn-info">Editer</a>
+               
+                  <span class="float-right">
+                     <button id="btn-etablissement-sup" type="button" data-toggle="modal" data-target="#supprimer"
+                        class="btn btn-outline-danger text-blue-600" title="Supprimer" data-id="{{ etablissement.slug }}"
+                        data-etablissement="{{etablissement.name}}">
+                        <i class="align-middle mr-2" data-feather="alert-triangle"></i>
+                        Delete
+                     </button>
+                  </span>
                {% endif %}
             </div>
          </div>

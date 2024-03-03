@@ -1,27 +1,23 @@
-	{% load static %}
-	<footer class="footer no-print">
-		<div class="container-fluid mb-0">
-			<div class="row text-muted">
-				<div class="col-6 text-left">
-					<p class="">
-						<a href="#" class="text-muted">
-							&copy; <strong>CAOSP-Z</strong>
-						</a> 
-						par Kis@rrWeb - Bignona - Ziguinchor
-					</p>
-				</div>
-				<div class="col-6 text-right no-print">
-					<ul class="list-inline">
-						<li class="list-inline-item">
-							<span class="text-muted">Aide</span>
-						</li>
-						<li class="list-inline-item">
-							<a class="text-muted" 
-								target="_blank" href="{% url 'core:about' %}">About</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-
+{% load static %}
+<footer class="footer no-print">
+  <div class="container-fluid mb-0">
+    <div class="row text-muted">
+      <div class="col-6 text-left">
+        <p class="">
+          <a href="#" class="text-muted">&copy; <strong>CAOSP-Z</strong></a>
+          par Kis@rrWeb - Bignona - Ziguinchor
+        </p>
+      </div>
+      <div class="col-6 text-right no-print">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <span class="text-muted">Aide</span>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" target="_blank" href="{% url 'core:about' %}">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

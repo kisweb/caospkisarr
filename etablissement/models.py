@@ -10,7 +10,8 @@ from caosp.settings import ANNEES
 from anneescolaire.models import AnneeScolaire
 from helpers.util import h_random_ascii
 from caosp.utils import slugify
-
+from django.contrib.contenttypes.fields import GenericForeignKey,GenericRelation
+from django.contrib.contenttypes.models import ContentType
 
 class Ief(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -37,8 +38,8 @@ class Etablissement(models.Model):
         ZIGUINCHOR = "Ziguinchor", "Ziguinchor"
 
     class TypeEtablissement(models.TextChoices):
-        COLLEGE = "college", "College"
-        LYCEE = "lycee", "Lycee"
+        COLLEGE = "College", "Collège"
+        LYCEE = "Lycee", "Lycée"
         MIXTE = "mixte", "Lycée Mixte"
         AUTRE = "autre", "Autre"
 
@@ -54,7 +55,8 @@ class Etablissement(models.Model):
     phone = models.CharField(max_length=15, null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
-    save_by = models.ForeignKey(User,related_name="etablissements", on_delete=models.SET_NULL, null=True)
+    save_by = models.ForeignKey(User, related_name="etablissements", on_delete=models.SET_NULL, null=True)
+    versements = GenericRelation("Tresorerie", related_query_name="etablissent")
 
     class Meta:
         verbose_name = "Etablissement"
@@ -85,7 +87,7 @@ class Quote(models.Model):
         Etablissement, related_name="quotes", on_delete=models.CASCADE, null=True
     )
     annee_scolaire = models.ForeignKey(
-        AnneeScolaire, related_name="quotes", on_delete=models.SET_NULL, null=True
+        AnneeScolaire, related_name="quotes", on_delete=models.CASCADE
     )
     save_by = models.ForeignKey(User, related_name="quotes", null=True, on_delete=models.SET_NULL)
     slug = models.SlugField(max_length=130)
@@ -128,12 +130,53 @@ class Quote(models.Model):
     def get_montant(self):
         montant = self.effectif * 100
         return montant
+
+
+class Tresorerie(models.Model):
+    class TypeMouvement(models.TextChoices):
+        ENTREE = 'Entree', 'Entrée'
+        SORTIE = 'Sortie', 'Sortie'
+        REGULARISATION = 'Regularisation', 'Régularisation'
+        ATTENTE = 'Attente', 'Attente'
+        
+    mouvement = models.CharField(max_length=20, choices=TypeMouvement.choices, null=True, default='Entree')
+    montant = models.PositiveIntegerField(default=0, null=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField(default=0, null=True)
+    content_objet = GenericForeignKey('content_type', 'object_id')
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     
+    def __str__(self):
+        return f"{self.mouvement} {self.montant}"
     
-def get_montant_general(annee:int |None = 1, **kwargs):
-    quotes = Quote.objects.filter(annee_scolaire=annee).all()
+    class Meta:
+        indexes = [ 
+            models.Index(fields=['content_type', 'object_id']),   
+        ]
+
+
+def get_montant_general(annee = None):
+    quotes = Quote.objects.all()
+    if annee is not None:
+        quotes = Quote.objects.filter(annee_scolaire=annee).all()
+        
     montant_general = sum(quote.versement for quote in quotes)
     return montant_general
 
 
+@receiver(post_save, sender=Etablissement)
+def create_quote_etablissement(sender, instance, created, **kwargs):
+    if created:
+        Quote.objects.create(
+            etablissement=instance,
+            annee_scolaire=AnneeScolaire.objects.filter(statut='anneeEnCours').first(),
+            save_by=User.objects.filter(is_staff=True).first()
+        )
+
+
+# @receiver(post_save, sender=Etablissement)
+# def save_quote_etablissement(sender, instance, **kwargs):
+#     instance.quote.save()
+    
 

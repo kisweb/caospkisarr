@@ -10,7 +10,7 @@
             <form action="" method="get">
               <div class="row">
                 <div class="col">
-                  <label for="">{{ filter_form.label }}</label>
+                  <div>{{ filter_form.label }}</div>
                   <span class="form-control-color">
                     {{ filter.form|crispy }}
                   </span>
@@ -18,8 +18,8 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <label for="">Nbre de lignes</label>
-                  <select class="form-control" name="per_page">
+                  <span for="for_page">Nbre de lignes</span>
+                  <select class="form-control" id="per_page" name="per_page">
                     <option class="form-control" value="10">10</option>
                     <option class="form-control" value="15">15</option>
                     <option class="form-control" value="20">20</option>
@@ -66,16 +66,16 @@
                             <td>{{etab.name}}</td>
                             <td>{{ etab.code }}</td>
                             <td>{{etab.ief}}</td>
-                            <td>{{ etab.phone }}</td>
-                            <td class="text-center font-bold">
-                            </td>
+                            <td>{{ etab.phone }}</td>                            
                             <td>
+                              {% if request.user.profile.code_etablissement == etab.code or request.user.is_staff%}
                               <a
-                                href="{% url 'etablissement:edit' etab.slug %} "
+                                href="{% url 'etablissement:etablissement' etab.slug %} "
                                 title="Detail"
                                 class="badge text-white bg-success float-right"
-                                >Voir</a
-                              >
+                                >Voir
+                              </a>
+                              {% endif %}
                             </td>
                           </tr>
                       {% endfor %}

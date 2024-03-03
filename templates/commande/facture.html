@@ -1,0 +1,118 @@
+{% extends 'layouts/base-caosp.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Gestion des Commandes
+{% endblock %}
+
+{% block content %}
+  <main class="content">
+    <div class="container p-0">
+      <h3 class="flex">
+        <strong>Factures</strong>
+        <span><a class="" href="{% url 'commande:index' %}">Retour</a></span>
+      </h3>
+      
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Commande</th>
+                    <th>Bénéficiaire</th>
+                    <th>Fournisseur</th>
+                    <th>Soumis le</th>
+                    <th>Montant</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                    <tr>
+                      <td>{{ facture.get_facture_type_display }}</td>
+                      <td>{{ facture.order }}</td>
+                      <td>{{ facture.beneficiaire }}</td>
+                      <td>{{ facture.order.fournisseur }}</td>
+                      <td>{{ facture.facture_date_time|date:'d/m/Y' }}</td>
+                      <td>{{ facture.total }}</td>
+                      <td class="text-right">edit</td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ facture.order.name }}</h5>
+          <h5>{{ facture.beneficiaire.name }}</h5>
+          <h5>{{ facture.updated|date:'d/m/Y' }}</h5>
+          <br /><br />
+          <h4 class="text-center text-capitalize">{{ facture.get_facture_type_display }} {{ facture.order.code }}</h4>
+        </div>
+        <div class="card-body text-left">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Désignation</th>
+                <th>Qté</th>
+                <th>PU</th>
+                <th class="text-right">Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for article in facture.articles.all %}
+                <tr>
+                  <td>{{ article.name|truncatechars:40 }}</td>
+                  <td>{{ article.quantity }}</td>
+                  <td>{{ article.unit_price }}</td>
+                  <td class="text-right">
+                    <b>{{ article.get_total }}</b>
+                  </td>
+                </tr>
+              {% endfor %}
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Sous-Total</th>
+                <th class="text-right">{{ facture.get_total }}</th>
+              </tr>
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Frais de port</th>
+                <th class="text-right">{{ facture.expedition }}</th>
+              </tr>
+              
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>TVA</th>
+                <th class="text-right">{{ facture.tva }} %</th>
+              </tr> 
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Remise</th>
+                <th class="text-right">{{ facture.remise }}</th>
+              </tr>
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Total à payer</th>
+                <th class="text-right">{{ facture.get_montant_net }}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <button onclick="window:print()" class="btn btn-primary">Imprimer</button>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

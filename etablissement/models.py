@@ -56,7 +56,7 @@ class Etablissement(models.Model):
     address = models.CharField(max_length=255, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     save_by = models.ForeignKey(User, related_name="etablissements", on_delete=models.SET_NULL, null=True)
-    versements = GenericRelation("Tresorerie", related_query_name="etablissent")
+    versements = GenericRelation("Tresorerie", related_query_name="etablissement")
 
     class Meta:
         verbose_name = "Etablissement"
@@ -135,7 +135,6 @@ class Quote(models.Model):
 class Tresorerie(models.Model):
     class TypeMouvement(models.TextChoices):
         ENTREE = 'Entree', 'Entrée'
-        SORTIE = 'Sortie', 'Sortie'
         REGULARISATION = 'Regularisation', 'Régularisation'
         ATTENTE = 'Attente', 'Attente'
         

@@ -14,7 +14,7 @@
         <span data-feather="briefcase" class="feather-sm mr-1"></span> <span class="align-middle">Settings</span>
       {% endif %}
     </a>
-    <a class="sidebar-link" href="{% url 'admin:login' %}">
+    <a class="sidebar-link" href="{% url 'admin:login' %}" target='__blank' >
       {% if request.user.is_superuser %}
         <span data-feather="briefcase" class="feather-sm mr-1"></span> <span class="align-middle">Administration</span>
       {% endif %}
@@ -59,8 +59,8 @@
           <li class="sidebar-item {% if 'commande-article' in segment %}{% endif %}">
             <a class="sidebar-link" href="{% url 'commande:article' %}">Articles</a>
           </li>
-          <li class="sidebar-item {% if 'commande-facture' in segment %}{% endif %}">
-            <a class="sidebar-link" href="#">Factures</a>
+          <li class="sidebar-item {% if 'gestion-index' in segment %}{% endif %}">
+            <a class="sidebar-link" href="{% url 'gestion:index' %}">Factures</a>
           </li>
         </ul>
       </ul>

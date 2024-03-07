@@ -1,0 +1,274 @@
+{% extends 'layouts/base-caosp.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+  Gestion des Commandes
+{% endblock %}
+
+{% block content %}
+  <main class="content">
+    <div class="container p-0">
+      <h3 class="flex no-print">
+        <strong>Factures</strong>
+        <span><a class="" href="{% url 'gestion:index' %}">Retour</a></span>
+      </h3>
+
+      <div class="row no-print">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Commande</th>
+                    <th>Bénéficiaire</th>
+                    <th>Fournisseur</th>
+                    <th>Soumis le</th>
+                    <th>Montant</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ facture.get_facture_type_display }}</td>
+                    <td>{{ facture.commande }}</td>
+                    <td>{{ facture.beneficiaire.name }}</td>
+                    <td>{{ facture.commande.beneficiaire.name }}</td>
+                    <td>{{ facture.updated|date:'d/m/Y' }}</td>
+                    <td>{{ facture.get_montant_net }}</td>
+                    <td class="text-right">VOIR</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ facture.order.name }}</h5>
+          <h5>{{ facture.beneficiaire.name }}</h5>
+          <h5>{{ facture.updated|date:'d/m/Y' }}</h5>
+          <br /><br />
+          <h4 class="text-center text-capitalize">{{ facture.get_facture_type_display }} {{ facture.commande.id }}</h4>
+        </div>
+        <div class="card-body text-left">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Désignation</th>
+                <th>Référence</th>
+                <th>Qté</th>
+                <th>PU</th>
+                <th class="text-right">Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for article in facture.commande.articles.all %}
+                <tr>
+                  <td>{{ article.designation|truncatechars:40 }}</td>
+                  <td>{{ article.reference|truncatechars:20 }}</td>
+                  <td>{{ article.quantite }}</td>
+                  <td>{{ article.prix }}</td>
+                  <td class="text-right">
+                    <b>{{ article.get_total }}</b>
+                  </td>
+                </tr>
+              {% endfor %}
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Sous-Total</th>
+                <th class="text-right">{{ facture.get_total }}</th>
+              </tr>
+
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>TVA ( {{ facture.tva }} % )</th>
+                <th class="text-right">{{ facture.get_tva }}</th>
+              </tr>
+
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Remise ( {{ facture.remise }} % )</th>
+                <th class="text-right">{{ facture.get_remise }}</th>
+              </tr>
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Frais de port</th>
+                <th class="text-right">{{ facture.expedition }}</th>
+              </tr>
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Total à payer</th>
+                <th class="text-right">{{ facture.get_montant_net }}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer no-print">
+          <button onclick="window:print()" class="btn btn-primary">Imprimer</button>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <hr />
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body m-sm-3 m-md-5">
+            <!-- Row start -->
+            <div class="row gutters mx-2">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center mb-2">
+                  <img src="{% static 'assets/img/logo/drapeau.png' %}" width="64" alt="sn" srcset="" />
+                </div>
+                <h6 class="text-center h4">République du Sénégal</h6>
+                <h6 class="text-center h6">-=-=-=-=-=-</h6>
+                <h6 class="text-center h6">Un Peuple - Un But - Une Foi</h6>
+              </div>
+            </div>
+            <!-- Row end -->
+            <!-- Row start -->
+            <div class="row gutters">
+              <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+                <div class="mb-3 mx-6">
+                  <img
+                    src="{% static 'assets/img/logo/MEN.png' %}"
+                    width="96"
+                    alt="men"
+                    srcset=""
+                  />
+                </div>
+                <h5 class="invoice-logo">
+                  Ministère de l'Education nationale
+                </h5>
+                <h5 class="invoice-logo">
+                  Inspection d'Académie de Ziguinchor
+                </h5>
+                <h4 class="invoice-logo">
+                  <strong> C.A.O.S.P. de Ziguinchor </strong>
+                </h4>
+              </div>
+              <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+                <address class="text-md-right">
+                  <br /><br />
+                  Ziguinchor, ce {{ladate}}<br />
+                  <br />
+                  n° ________________/caosp/z/caosp/
+                </address>
+              </div>
+            </div>
+            <!-- Row end -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="text-muted">Référence No.</div>
+                <strong>{{ facture.reference }}</strong>
+              </div>
+              <div class="col-md-6 text-md-right">
+                <div class="text-muted">Date de la transaction</div>
+                <strong>{{ facture.updated|date:'d/m/Y' }}</strong>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="text-muted">{{ facture.beneficiaire.get_personne_type_display }}</div>
+                <strong>{{ facture.beneficiaire.name }}</strong>
+                <p>
+                  {{ facture.beneficiaire.phone }} <br /> <br />
+                  {{ facture.beneficiaire.piece }} : {{ facture.beneficiaire.numero }}
+                  <a href="#">-</a>
+                </p>
+              </div>
+              <div class="col-md-6 text-md-right">
+                <div class="text-muted">Fournisseur :</div>
+                <strong>{{ facture.commande.fournisseur.service }}</strong>
+                <p>
+                  {{ facture.commande.fournisseur.numero }} - {{ facture.commande.fournisseur.locality }}
+                  <a href="#">info@adminkit.com</a>
+                </p>
+              </div>
+            </div>
+
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Désignation</th>
+                  <th>Référence</th>
+                  <th>Qté</th>
+                  <th>PU</th>
+                  <th class="text-right">Montant</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for article in facture.commande.articles.all %}
+                  <tr>
+                    <td>{{ article.designation|truncatechars:40 }}</td>
+                    <td>{{ article.reference|truncatechars:20 }}</td>
+                    <td>{{ article.quantite }}</td>
+                    <td>{{ article.prix }}</td>
+                    <td class="text-right">
+                      <b>{{ article.get_total }}</b>
+                    </td>
+                  </tr>
+                {% endfor %}
+
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>Subtotal</th>
+                  <th class="text-right">$275.00</th>
+                </tr>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>Shipping</th>
+                  <th class="text-right">$8.00</th>
+                </tr>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>Discount</th>
+                  <th class="text-right">5%</th>
+                </tr>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>Total</th>
+                  <th class="text-right">$268.85</th>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="text-center">
+              <p class="text-sm">
+                <strong>Extra note:</strong> Please send all items at the same time to the shipping address. Thanks in advance.
+              </p>
+
+              <button onclick="window.print()" class="btn btn-primary">Imprimer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

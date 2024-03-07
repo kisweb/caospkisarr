@@ -15,6 +15,7 @@
       <div class="row">
         <div class="col">
           <div class="card">
+            {{ facture }}
             <div class="card-body">
               <table class="table table-sm">
                 <thead>
@@ -32,12 +33,12 @@
                   
                     <tr>
                       <td>{{ facture.get_facture_type_display }}</td>
-                      <td>{{ facture.order }}</td>
-                      <td>{{ facture.beneficiaire }}</td>
-                      <td>{{ facture.order.fournisseur }}</td>
+                      <td>{{ facture.order.name }}</td>
+                      <td>{{ facture.beneficiaire.name}}</td>
+                      <td>{{ facture.order.fournisseur.name }}</td>
                       <td>{{ facture.facture_date_time|date:'d/m/Y' }}</td>
                       <td>{{ facture.total }}</td>
-                      <td class="text-right">edit</td>
+                      <td class="text-right">VOIR</td>
                     </tr>
                   
                 </tbody>

@@ -1,10 +1,10 @@
 from account.models import User
-from commande.models import Category, Beneficiaire, Order, Facture, Article
+from gestion.models import Commande, Facture, CommandeArticle
 from django.utils import timezone
 from pprint import pprint
 
 def run():
-    factures = Facture.objects.all()
+    facture = Facture.objects.get(id=1)
     
-    total1 = factures[0]
-    pprint(total1)
+    fact = facture
+    pprint(fact)

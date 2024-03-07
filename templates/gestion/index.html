@@ -1,0 +1,102 @@
+{% extends 'layouts/base-caosp.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Gestion des quote-parts
+{% endblock %}
+{% block stylesheets %}
+  <style>
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
+    @media not print {
+      .print {
+        display: block !important;
+        width: auto;
+      }
+    }
+  </style>
+{% endblock %}
+{% block content %}
+  <main class="content">
+    <div class="container p-0">
+      <h3 class="flex"><strong>Gestion</strong></h3>
+      <div class="d-print-none row">
+        <div class="col-md-4">
+          <a href=" {% url 'gestion:index' %} " class="">
+            <div class="card">
+              <div class="card-body text-center">
+                <h3>Nos partenaires</h3>
+                <div class="mb-2">
+                  <i class="align-middle mr-2" data-feather="briefcase"></i> <span class="align-middle">{{ beneficiaires }} Bénéficiares</span>
+                  <i class="align-middle mr-2" data-feather="briefcase"></i> <span class="align-middle">{{ fournisseurs }} Fournisseurs</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href=" {% url 'gestion:index' %} " class="">
+            <div class="card">
+              <div class="card-body text-center">
+                <h3>Commandes</h3>
+                <div class="mb-2">
+                  <i class="align-middle mr-2" data-feather="paperclip"></i> <span class="align-middle">{{ commandes }}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href=" {% url 'commande:beneficiaire' %} " class="">
+            <div class="card">
+              <div class="card-body text-center">
+                <h3>Factures</h3>
+                <div class="mb-2">
+                  <i class="align-middle mr-2" data-feather="user-check"></i> <span class="align-middle">{{ factures.count }}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row no-print">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Commande</th>
+                    <th>Bénéficiaire</th>
+                    <th>Fournisseur</th>
+                    <th>Soumis le</th>
+                    <th>Montant</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for facture in factures %}
+                    <tr>
+                      <td>{{ facture.get_facture_type_display }}</td>
+                      <td>{{ facture.commande }}</td>
+                      <td>{{ facture.beneficiaire.name}}</td>
+                      <td>{{ facture.commande.fournisseur.name }}</td>
+                      <td>{{ facture.updated|date:'d/m/Y' }}</td>
+                      <td>{{ facture.get_montant_net }}</td>
+                      <td class="text-right">
+                        <a class="" href="{% url 'gestion:facture_print' facture.id %}">Voir</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

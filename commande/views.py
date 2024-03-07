@@ -79,13 +79,14 @@ def beneficiaire(request):
 
 def facture_add(request):
     factures = Facture.objects.all()
-    form = FactureCreateForm()
-    context = {'segment': 'commande-facture', 'form': form, 'factures': factures, 'beneficiaires': Beneficiaire.objects.all() }
+    formf = FactureCreateForm()
+    forma = ArticleCreateForm()
+    context = {'segment': 'commande-facture', 'form': formf, 'form2': forma ,'factures': factures, 'beneficiaires': Beneficiaire.objects.all() }
 
     return render(request, 'commande/add-facture.html', context=context)
 
 def facture_print(request, pk):
-    facture = Facture.objects.filter(id=pk).select_related('order', 'beneficiaire')
+    facture = Facture.objects.select_related('order', 'beneficiaire').filter(id=pk)
     
     context = {'segment': 'commande-facture-print', 'facture': facture, 'beneficiaires': Beneficiaire.objects.all() }
 

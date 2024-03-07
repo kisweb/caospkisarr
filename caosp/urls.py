@@ -10,6 +10,7 @@ urlpatterns = [
     path("auth/", include('account.urls')),
     path("", include('core.urls')),
     path("etablissements/", include('etablissement.urls')),
+    path("gestion/", include('gestion.urls')),
     path("quotes/", include('quote.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
     path("commandes/", include("commande.urls")),

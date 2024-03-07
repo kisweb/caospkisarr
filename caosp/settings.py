@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'ninja',
     'corsheaders',
     'commande',
+    'gestion',
 ]
 # postgres://caosp:8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5@dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com/quoteparts
 MIDDLEWARE = [

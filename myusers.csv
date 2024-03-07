@@ -121,9 +121,9 @@ id;password;email;name;is_active;is_superuser;is_staff;date_joined;last_login
 127;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_aline_sitoe_diatta@caosp.zg;LYCEE ALINE SITOE DIATTA;true;false;false;2024-01-20 10:03:43;2024-01-20 10:03:37
 128;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_cabrousse@caosp.zg;LYCEE CABROUSSE;true;false;false;2024-01-20 10:00:49;2024-01-20 09:59:45
 129;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_mlomp_oussouye@caosp.zg;LYCEE MLOMP OUSSOUYE;true;false;false;2024-01-20 09:56:29;2024-01-20 17:19:14
-130;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_adeane@caosp.zg;LYCEE ADEANE;true;false;false;2024-01-20 09:48:10;2024-01-20 09:48:03
-131;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_djignabo@caosp.zg;LYCEE DJIGNABO;true;false;false;2024-01-20 09:43:14;2024-01-20 13:30:31
-132;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_elhadj_omar_lamine_badji@caosp.zg;LYCEE ELHADJ OMAR LAMINE BADJI;true;false;false;2024-01-19 19:01:21;2024-01-20 18:17:67
-133;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_indetermine@caosp.zg;LYCEE INDETERMINE;true;false;false;2024-01-20 10:03:43;2024-01-20 10:03:37
-134;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_niaguis@caosp.zg;LYCEE NIAGUIS;true;false;false;2024-01-20 10:00:50;2024-01-20 09:59:46
-135;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_peyrissac@caosp.zg;LYCEE PEYRISSAC;true;false;false;2024-01-20 09:56:30;2024-01-20 17:19:15
+7;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_adeane@caosp.zg;LYCEE ADEANE;true;false;false;2024-01-20 09:48:10;2024-01-20 09:48:03
+2;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_djignabo@caosp.zg;LYCEE DJIGNABO;true;false;false;2024-01-20 09:43:14;2024-01-20 13:30:31
+3;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_elhadj_omar_lamine_badji@caosp.zg;LYCEE ELHADJ OMAR LAMINE BADJI;true;false;false;2024-01-19 19:01:21;2024-01-20 18:17:67
+4;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_indetermine@caosp.zg;LYCEE INDETERMINE;true;false;false;2024-01-20 10:03:43;2024-01-20 10:03:37
+5;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_niaguis@caosp.zg;LYCEE NIAGUIS;true;false;false;2024-01-20 10:00:50;2024-01-20 09:59:46
+6;pbkdf2_sha256$720000$dLuxbrZVPpcHi5Jn04Tlr9$7FQTn5wSO/zkza3UwCcQZhqjX260UN52ff+fJPOSfSs=;lycee_peyrissac@caosp.zg;LYCEE PEYRISSAC;true;false;false;2024-01-20 09:56:30;2024-01-20 17:19:15

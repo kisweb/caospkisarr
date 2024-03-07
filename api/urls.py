@@ -23,10 +23,10 @@ app = NinjaAPI(
     docs_decorator=staff_member_required,
     
     openapi_extra={
-        "info": { "termsOfService": "https://example.com/terms/", }
+        "info": { "termsOfService": "http://localhost:8024/terms/", }
         },
     title="CAOSP API",
-    description="Les données brutes de CAOSP de Ziguinchor pour la gestion des quoteparts",
+    description="Les données brutes de CAOSP de Ziguinchor pour la gestion des quote-parts",
     docs_url="docs/",
     version='2.0.0'
     )

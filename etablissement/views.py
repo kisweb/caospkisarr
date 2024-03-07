@@ -24,7 +24,7 @@ def etablissements(request):
     # recent_etablissements = Etablissement.objects.filter(created_date__gte=last_year)
     
     # authors_with_recent_books = Author.objects.filter(id__in=Subquery(recent_books.values('author_id')))
-    filterset = EtablissementFilterSet(request.GET, queryset=Etablissement.objects.prefetch_related("quotes", "ief" )) 
+    filterset = EtablissementFilterSet(request.GET, queryset=Etablissement.objects.order_by('id').prefetch_related("quotes", "ief"))
     lesetabs = filterset.qs
     page_num = request.GET.get('page', 1)
     per_page = int(request.GET.get('per_page', 10))

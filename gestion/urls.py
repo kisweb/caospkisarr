@@ -3,11 +3,11 @@ from django.urls import path
 from . import views
 
 
-app_name = 'core'
+app_name = 'gestion'
 
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('about/', views.about, name='about'),
-    path('terms/', views.term, name='terms'),
+    path('facture/<int:pk>/imprimer/', views.facture_print, name='facture_print'),
+    
 ]

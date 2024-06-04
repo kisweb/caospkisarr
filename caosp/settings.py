@@ -95,6 +95,7 @@ ROOT_URLCONF = "caosp.urls"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8001",
+    "https://caospzig.onrender.com/",
     
 ]
 

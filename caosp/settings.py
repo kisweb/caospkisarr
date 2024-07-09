@@ -176,7 +176,7 @@ WSGI_APPLICATION = "caosp.wsgi.application"
 # DATABASE_URL=postgres://caosp:8C2oTGMEPY64a71oKqbYWvwCBsqZwoz5@dpg-cmganio21fec739ottig-a.frankfurt-postgres.render.com/quoteparts
 
 DATABASES = {
-    'default': dj_database_url.parse(config('postgres://kisarr:hkr33Udf1RVL3HSRXsElVWCM8eDHznAG@dpg-cpfjbvv109ks73blme90-a/kisarrdb'))
+    'default': dj_database_url.parse('postgres://kisarr:hkr33Udf1RVL3HSRXsElVWCM8eDHznAG@dpg-cpfjbvv109ks73blme90-a/kisarrdb')
 }
 
 #DATABASES = {
